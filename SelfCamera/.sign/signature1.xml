@@ -4,11 +4,11 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>SD6jSH7ps/m9BCBqPpkCUrOlM1BHO9zu3GO7hUZRJA8=</DigestValue>
+<DigestValue>69g+TxeG/avyXTIeqAglkz/kDfGrTBlVuUGcM0sBB80=</DigestValue>
 </Reference>
 <Reference URI="bin%2Fselfcamera">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>GCIfNq1aC/kact8wvhRRB5Lz3ozWJKwj54r3fv0w5Lw=</DigestValue>
+<DigestValue>oHlw1D0bXWn75H/OL7G8brm+dYm2sC9RGNP1o+4XWYg=</DigestValue>
 </Reference>
 <Reference URI="lib%2Flibdlib.a">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -219,9 +219,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-aHWJjsg8NpbTlPDzgtcKnyp0rDNiyRaHWknKnG1+KIgpMBhcDndmBxEO8HRV2HHUHjIaB1MOMmfP
-Koj2Kkk5EwiLTbmg/SgSxqeuS2qsbYhwKJcnCoUAk5TW7GNFOWHViDMCDLjE7JB+hQUcZAGAUhzu
-EXFRAsC/VxQtFr2f9Pc=
+PB8tglqwc22DThjHe68PXbKPD/ma2bSiFuEjrzSy+5zEb6vdc4eORNQlD9pfB9CiVsz0K7imts/i
+oDDanH4o1/fWY+MCfwfHu91q2gpLlBXtVKzMnyKU8FjliMpN5MtaiE5+44n3rWCtSu5pZJvQDPxA
++NI+uWPG1n4aU5NBij0=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

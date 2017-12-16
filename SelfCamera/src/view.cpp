@@ -62,6 +62,7 @@ dlib::shape_predictor sp; /* shape predictor */
 int resolution[2] = { 176, 144 };
 static imageinfo imgarr[10];
 
+static void _camera_face_detected_cb(camera_detected_face_s* faces, int count, void* user_data);
 /**
  * @brief Creates essential objects: window, conformant and layout.
  * @param[in] user data pointer
@@ -205,6 +206,9 @@ bool view_resume(void) {
 		res = camera_start_preview(s_info.camera);
 		if (res == CAMERA_ERROR_NONE)
 			camera_start_focusing(s_info.camera, true);
+		if(s_info.sticker != 0)
+			camera_start_face_detection(s_info.camera,
+						_camera_face_detected_cb, &s_info.faces);
 	}
 	return true;
 }
@@ -782,7 +786,6 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 		dlib::full_object_detection shape = sp(img, s_info.faces[i]);
 		//draw_landmark(frame, shape);
 
-
 		int x = shape.part(i)(1);
 		int y = frame->height - shape.part(i)(0);
 		if (imgarr != NULL && imgarr[0].size > 0) {
@@ -790,32 +793,32 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 		}
 
 		/*
-		switch (s_info.sticker) {
-		case 1:
-			sticker_rudolph(frame, shape);
-			break;
-		case 2:
-			sticker_bald(frame, shape);
-			break;
-		case 3:
-			sticker_glasses(frame, shape);
-			break;
-		case 4:
-			sticker_hat(frame, shape);
-			break;
-		case 5:
-			sticker_mustache(frame, shape);
-			break;
-		case 6:
-			sticker_rabbit(frame, shape);
-			break;
-		case 7:
-			sticker_santa(frame, shape);
-			break;
-		default:
-			break;
-		}
-		*/
+		 switch (s_info.sticker) {
+		 case 1:
+		 sticker_rudolph(frame, shape);
+		 break;
+		 case 2:
+		 sticker_bald(frame, shape);
+		 break;
+		 case 3:
+		 sticker_glasses(frame, shape);
+		 break;
+		 case 4:
+		 sticker_hat(frame, shape);
+		 break;
+		 case 5:
+		 sticker_mustache(frame, shape);
+		 break;
+		 case 6:
+		 sticker_rabbit(frame, shape);
+		 break;
+		 case 7:
+		 sticker_santa(frame, shape);
+		 break;
+		 default:
+		 break;
+		 }
+		 */
 	}
 }
 
@@ -839,7 +842,17 @@ void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
 
 static void _main_view_effect_button_cb(void) {
 	s_info.filter = (++s_info.filter) % MAX_FILTER;
-	switch(s_info.filter) {
+
+	camera_state_e state;
+	int error_code = camera_get_state(s_info.camera, &state);
+	if (CAMERA_STATE_PREVIEW == state) {
+		error_code = camera_unset_preview_cb(s_info.camera);
+		if (CAMERA_ERROR_NONE != error_code) {
+			return;
+		}
+		camera_stop_face_detection(s_info.camera);
+	}
+	switch (s_info.filter) {
 	case 0:
 		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_NONE);
 		break;
@@ -856,10 +869,16 @@ static void _main_view_effect_button_cb(void) {
 }
 
 static void _main_view_sticker_button_cb(void) {
-	s_info.sticker = (++s_info.sticker) % MAX_STICKER;
+	int error_code;
 
+	s_info.sticker = (++s_info.sticker) % MAX_STICKER;
+	if(s_info.sticker == 0)
+	{
+		camera_unset_preview_cb(s_info.camera);
+		camera_stop_face_detection(s_info.camera);
+	}
 	camera_state_e state;
-	int error_code = camera_get_state(s_info.camera, &state);
+	error_code = camera_get_state(s_info.camera, &state);
 	if (CAMERA_ERROR_NONE != error_code) {
 		DLOG_PRINT_ERROR("camera_get_state", error_code);
 		return;
@@ -903,6 +922,7 @@ static void _main_view_sticker_button_cb(void) {
 	if (CAMERA_ERROR_NONE != error_code) {
 		DLOG_PRINT_ERROR("camera_start_preview", error_code);
 	}
+	camera_start_focusing(s_info.camera, true);
 
 	error_code = camera_start_face_detection(s_info.camera,
 			_camera_face_detected_cb, &s_info.faces);
@@ -958,7 +978,7 @@ static Evas_Object *_main_view_add(void) {
 			_main_view_destroy_cb, NULL);
 
 	elm_layout_file_set(s_info.layout, _get_resource_path(EDJ_MAIN), GRP_MAIN);
-	elm_object_signal_emit(s_info.layout, "mouse,clicked,1", "timer_2");
+	//elm_object_signal_emit(s_info.layout, "mouse,clicked,1", "timer_2");
 
 	s_info.preview_canvas = evas_object_image_filled_add(
 			evas_object_evas_get(s_info.layout));

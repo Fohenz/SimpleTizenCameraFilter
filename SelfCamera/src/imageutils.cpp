@@ -1,5 +1,4 @@
 #include "imageutils.h"
-#include "main.h"
 #include <image_util.h>
 #include <storage.h>
 
@@ -96,7 +95,7 @@ void _image_util_start_cb(imageinfo* imginfo)
 
     int error_code = image_util_decode_jpeg(sample_file_path, IMAGE_UTIL_COLORSPACE_NV12, &img_source, &width, &height, &size_decode);
     if (error_code != IMAGE_UTIL_ERROR_NONE) {
-        DLOG_PRINT_ERROR("image_util_decode_jpeg", error_code);
+        //DLOG_PRINT_ERROR("image_util_decode_jpeg", error_code);
         imginfo->error = error_code;
         return;
     }
@@ -108,7 +107,7 @@ void _image_util_start_cb(imageinfo* imginfo)
 	imginfo->data = (unsigned char*)malloc(sizeof(unsigned char)*imginfo->size);
 	memcpy(imginfo->data, img_source, sizeof(unsigned char)*imginfo->size);
 
-    DLOG_PRINT_DEBUG_MSG("Decoded image width: %d height: %d size: %d", width, height, size_decode);
+    //DLOG_PRINT_DEBUG_MSG("Decoded image width: %d height: %d size: %d", width, height, size_decode);
 
     /* no need to transform RGB->NV12, just decode into NV12 */
 }

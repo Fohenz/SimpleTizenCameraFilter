@@ -47,8 +47,6 @@
     2011.  SSE4 is the next fastest and is supported by most current machines.  
 */
 
-#include "data.h"
-#include "main.h"
 #include "view.h"
 #include "landmark.h"
 

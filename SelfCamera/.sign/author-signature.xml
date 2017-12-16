@@ -4,7 +4,7 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="bin%2Fselfcamera">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>9iXGCo52A2HcuvrnSCI+HXrI64H9npRTXXSEi+8sxXo=</DigestValue>
+<DigestValue>GCIfNq1aC/kact8wvhRRB5Lz3ozWJKwj54r3fv0w5Lw=</DigestValue>
 </Reference>
 <Reference URI="lib%2Flibdlib.a">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -186,6 +186,10 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>tBG3R4vaEwE15xNidFT+fiZ9dV3yJOYvNKCos0iAMTU=</DigestValue>
 </Reference>
+<Reference URI="res%2Frot.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>lwwCEvJgrc0a9yY/KenRGGrNwy/i8fj5apRZa3AAtbc=</DigestValue>
+</Reference>
 <Reference URI="res%2Fshape_predictor_68_face_landmarks.dat">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>+9wsuA65qnp1hnLL/doyumMA7+m25seimf9+c2sRuS8=</DigestValue>
@@ -211,9 +215,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-quke44Jfv/RbUG1TCJDY22e1E4chFyFWtehrkJGcfK6xjHzHWtln5sjDYX2cm4jNF/baQNZ3LYW4
-8M/PSx+EqI/ZBS02IDGEZv7BQaK2EjWXm6ZJ4pjTYEfmnlBpmCxJLL1g3v8j8C86D4BYYTij98kJ
-XS/A95hNbTeU/Wyoufs=
+bbOkRv9dv6iEqnNBORii2vWa9xHkVGRdv3rUmAmZgMTEw39AZS3YCivpA1Y9BqLc5tjL7vLu3MsE
+Ta6fepstI5leStUAnyf2hKYhYq7nad6DFf9mAvJ/kH2QHaErzP8KSOdnfvethJhGf1iCFkeup1Mp
+p6OnKOHV8OLKEKvIemQ=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

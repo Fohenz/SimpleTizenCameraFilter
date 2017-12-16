@@ -18,6 +18,7 @@
 #include "selfcamera.h"
 #include "view_defines.h"
 #include "landmark.h"
+#include "imageutils.h"
 
 #define COUNTER_STR_LEN 3
 #define FILE_PREFIX "IMAGE"
@@ -781,12 +782,12 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 		dlib::full_object_detection shape = sp(img, s_info.faces[i]);
 		//draw_landmark(frame, shape);
 
-		/*
+
 		int x = shape.part(i)(1);
 		int y = frame->height - shape.part(i)(0);
 		if (imgarr != NULL && imgarr[0].size > 0) {
 			_image_util_imgcpy(frame, &imgarr[0], x, y);
-		}*/
+		}
 
 		/*
 		switch (s_info.sticker) {
@@ -840,10 +841,16 @@ static void _main_view_effect_button_cb(void) {
 	s_info.filter = (++s_info.filter) % MAX_FILTER;
 	switch(s_info.filter) {
 	case 0:
-		camera_attr_effect(s_info.camera, CAMERA_ATTR_EFFECT_NONE);
+		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_NONE);
 		break;
 	case 1:
-		camera_attr_effect(s_info.camera, CAMERA_ATTR_EFFECT_NEGATIVE);
+		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_NEGATIVE);
+		break;
+	case 2:
+		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_GRAY);
+		break;
+	case 3:
+		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_SEPIA);
 		break;
 	}
 }

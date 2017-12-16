@@ -58,21 +58,25 @@ using namespace std;
 
 // ----------------------------------------------------------------------------------------
 
-void draw_hairband(camera_preview_data_s* frame, const full_object_detection shape, int id, imageinfo* imgarr)
+void draw_rudolph(camera_preview_data_s* frame, const full_object_detection shape, imageinfo* imgarr)
 {
 	int h = ((shape.part(21)+shape.part(22)) - shape.part(33))(1);
-	int fore_l = shape.part(19)(0);
-	int fore_r = shape.part(24)(0);
+	int fore_l = frame->height - shape.part(17)(0);
+	int fore_r = frame->height - shape.part(26)(0);
+
+	int nose_x = frame->height - shape.part(34)(0);
+	int nose_y = shape.part(34)(1);
 
 	int migan = fore_l - fore_r;
 
-	imageinfo imginfo = imgarr[id];
-
 	// draw left ear
-	_image_util_imgcpy(frame, &imgarr[0], h, fore_l);
+	_image_util_imgcpy(frame, &imgarr[3], h, fore_l);
 
 	// draw right ear
 	_image_util_imgcpy(frame, &imgarr[4], h, fore_r);
+
+	// draw nose
+	_image_util_imgcpy(frame, &imgarr[5], nose_y, nose_x);
 }
 
 void draw_landmark(camera_preview_data_s* frame, const full_object_detection shape)

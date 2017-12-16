@@ -1,4 +1,4 @@
-reated by https://www.gitignore.io/api/c,eclipse
+#Created by https://www.gitignore.io/api/c,eclipse
 
 ### C ###
 # Prerequisites
@@ -120,7 +120,8 @@ local.properties
 *signature*.xml
 *.wgt
 .*_delta*
+*.tpk
 
 # End of https://www.gitignore.io/api/c,eclipse
-/Debug/
-/SA_Report/
+Debug/
+SA_Report/

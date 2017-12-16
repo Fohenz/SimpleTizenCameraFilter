@@ -804,12 +804,9 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 	// each face we detected.
 	for (unsigned long i = 0; i < count; ++i) {
 		dlib::full_object_detection shape = sp(img, s_info.faces[i]);
-		//draw_landmark(frame, shape);
+		// draw_landmark(frame, shape);
 
-		int x = shape.part(i)(1);
-		int y = frame->height - shape.part(i)(0);
-		if (imgarr != NULL && imgarr[0].size > 0) {
-			_image_util_imgcpy(frame, &imgarr[0], x, y);
+		draw_rudolph(frame, shape, imgarr);
 
 //		draw_hairband(frame, shape, 0, imgarr);
 
@@ -883,7 +880,7 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
 	if (frame->format == CAMERA_PIXEL_FORMAT_NV12
 			&& frame->num_of_planes == 2) {
-
+/*
 		int x = 50;
 		int y = 50;
 		_image_util_imgcpy(frame, &imgarr[16], x, y);
@@ -896,14 +893,18 @@ void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
 
 		x = 50;
 		y = 100;
+		_image_util_imgcpy(frame, &imgarr[7], x, y);
+
+		x = 100;
+		y = 50;
 		_image_util_imgcpy(frame, &imgarr[8], x, y);
 
-		x = 130;
-		y = 50;
-		_image_util_imgcpy(frame, &imgarr[12], x, y);
+		x = 100;
+		y = 100;
+		_image_util_imgcpy(frame, &imgarr[2], x, y);
 
 		return;
-
+*/
 		std::vector<dlib::rectangle> buf =
 				*((std::vector<dlib::rectangle>*) user_data);
 		size_t count = buf.size();

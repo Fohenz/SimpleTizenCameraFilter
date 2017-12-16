@@ -60,7 +60,7 @@ static Evas_Object *_main_view_add(void);
 static Evas_Object *_view_create_bg(void);
 dlib::shape_predictor sp; /* shape predictor */
 int resolution[2] = { 176, 144 };
-static imageinfo imgarr[10];
+static imageinfo imgarr[STICKER_NUM];
 
 /**
  * @brief Creates essential objects: window, conformant and layout.
@@ -113,7 +113,7 @@ Eina_Bool view_create(void *user_data) {
 	dlib::deserialize(file_path) >> sp;
 	free(file_path);
 
-	_image_util_start_cb(&imgarr[0]);
+	_image_util_read_stickers(imgarr);
 
 	/* Show the window after main view is set up */
 	evas_object_show(s_info.win);
@@ -782,17 +782,20 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 		dlib::full_object_detection shape = sp(img, s_info.faces[i]);
 		//draw_landmark(frame, shape);
 
-
-		int x = shape.part(i)(1);
-		int y = frame->height - shape.part(i)(0);
-		if (imgarr != NULL && imgarr[0].size > 0) {
-			_image_util_imgcpy(frame, &imgarr[0], x, y);
-		}
+//		draw_hairband(frame, shape, 0, imgarr);
 
 		/*
+		int x = shape.part(34)(1);
+		int y = frame->height - shape.part(34)(0);
+		if (imgarr != NULL) {
+			_image_util_imgcpy(frame, &imgarr[10], x, y);
+		}
+		*/
+
+/*
 		switch (s_info.sticker) {
 		case 1:
-			sticker_rudolph(frame, shape);
+			sticker_rudolph(frame, shape, imgarr);
 			break;
 		case 2:
 			sticker_bald(frame, shape);
@@ -822,6 +825,28 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
 	if (frame->format == CAMERA_PIXEL_FORMAT_NV12
 			&& frame->num_of_planes == 2) {
+
+		int x = 50;
+		int y = 50;
+		_image_util_imgcpy(frame, &imgarr[16], x, y);
+
+
+
+		x = 130;
+		y = 100;
+		_image_util_imgcpy(frame, &imgarr[15], x, y);
+
+		return;
+
+		x = 50;
+		y = 100;
+		_image_util_imgcpy(frame, &imgarr[8], x, y);
+
+		x = 130;
+		y = 50;
+		_image_util_imgcpy(frame, &imgarr[12], x, y);
+
+		return;
 
 		std::vector<dlib::rectangle> buf =
 				*((std::vector<dlib::rectangle>*) user_data);

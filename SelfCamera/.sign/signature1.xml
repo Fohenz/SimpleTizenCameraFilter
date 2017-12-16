@@ -4,15 +4,63 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>SD6jSH7ps/m9BCBqPpkCUrOlM1BHO9zu3GO7hUZRJA8=</DigestValue>
+<DigestValue>k0PHmAvn2e7vwGBnZBQS+M9aYCVcHG0ic1jJwnJRh+I=</DigestValue>
 </Reference>
 <Reference URI="bin%2Fselfcamera">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>GCIfNq1aC/kact8wvhRRB5Lz3ozWJKwj54r3fv0w5Lw=</DigestValue>
+<DigestValue>fddMoat1GMdW8XQg/weYJb/DAgTkshEdJizx1s5OdoE=</DigestValue>
 </Reference>
 <Reference URI="lib%2Flibdlib.a">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>nyAVIN3Pk6ls6+lw3FKooAlwC4cFs8GLqAQGnHP4jBw=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_left0.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>1LV8KNif3QuhZlYq8aSLGW/EDX8/UVhLnVId8jDCIkI=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_left1.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>tMGkGr8EkmjNOnRiFSwDS0WFLPwqhm1M6LaB+s65G1U=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_left2.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>KrxtEoDJukJ+oavq97ptgUHRCuacjsGbmXrXn2oHmso=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_left3.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>bHmD8WYqumxH3YhrarN2clvtbCHaXAzrBShY3I8RRW8=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_nose0.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>yjRXTldks1dB33smfCfLcm5+0v3NFfPJAsVrt6soRvs=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_nose1.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>oX1B/s5q1iGKTPOr7l5QeWd+t3tgg8fgeULq4/+dzpQ=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_nose2.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>Go2t7sGJHBOkh9hx+QQchZaHlvYuWztkFsTvD+G553c=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_nose3.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>oWoc3Q4diWbZ9kqJTtOkcWGOsLCjPNqGAeHtfHP3Ny4=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_right0.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>37Ei54+bkK7Psd6XrXVI07HM2jlVwmz71FmiZQbMxg4=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_right1.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>sr1sYOPo8VI9RHqbCccs05GxpVNtP1+TAr8v/1L9Qp8=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_right2.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>PNrGygTaJuFWeo3AFThQzpzRnoyPsOFlz434reuhZog=</DigestValue>
+</Reference>
+<Reference URI="res%2Fdeer_right3.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>CZAxcsIzAUfI5kG79eS4PqfNo2qZCXF+PNuLJP2QH+w=</DigestValue>
 </Reference>
 <Reference URI="res%2Fedc%2Fmain.edc">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -20,7 +68,39 @@
 </Reference>
 <Reference URI="res%2Fedc%2Fmain.edj">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>6h1UO3w6CGJLJn4AzqLIlTdsR/vOa99UmE2+qU698Kk=</DigestValue>
+<DigestValue>O7ycPo//4ypoq/DEJQLN3omokMb8yK7MtdsM6kUzWS8=</DigestValue>
+</Reference>
+<Reference URI="res%2Fglasses03.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>9qV8lozL1W+I2nDu4E6qTcZh/86cZMrPx0DySPrF7aU=</DigestValue>
+</Reference>
+<Reference URI="res%2Fhat0.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>l6n82BD8HjvOvwjUfn0ixmhcg4GbAFLVMfMpwEDC3qc=</DigestValue>
+</Reference>
+<Reference URI="res%2Fhat01.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>sNNa1XEKDGg7lxj+BHshZuPqvTbxirQn+MWygPky3U4=</DigestValue>
+</Reference>
+<Reference URI="res%2Fhat1.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>UtMMs9IcX6higaQ00jrQhObwTNgsaNiqShp89fPXWKY=</DigestValue>
+</Reference>
+<Reference URI="res%2Fhat2.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>YsO8yCy6zUzB+A6EBa2j0WExETm6elmYJOuFdAfPNQc=</DigestValue>
+</Reference>
+<Reference URI="res%2Fhat3.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>ihgHJ41GVdnKiftaFmTOYPEk4oOw2RVug9eXJcG/dhY=</DigestValue>
+</Reference>
+<Reference URI="res%2Fheart.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>c9TomxgcJ/c0tq6ZejJYrKG8ilu3I3xtZvkD2qe02hE=</DigestValue>
+</Reference>
+<Reference URI="res%2Fheart0.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>mzgBSmqdv9PGGw2DSIzUqw4RiljzM0n89PuBBCUtTgY=</DigestValue>
 </Reference>
 <Reference URI="res%2Fimages%2Fmain%2Fback.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -202,6 +282,10 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>BIrfTasIshnM0FKNodWbJmWfL14pmgpaJTFavImrc60=</DigestValue>
 </Reference>
+<Reference URI="res%2Ftest.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>J/b+OkQLB5av/4HpQx8O4eacHvoTSVTs9z4YbvNrsHI=</DigestValue>
+</Reference>
 <Reference URI="shared%2Fres%2Fselfcamera.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>1d0oEZHqPn+QzNzGIHwj9ODby6x9ggFs9uOsav6jPNs=</DigestValue>
@@ -219,9 +303,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-aHWJjsg8NpbTlPDzgtcKnyp0rDNiyRaHWknKnG1+KIgpMBhcDndmBxEO8HRV2HHUHjIaB1MOMmfP
-Koj2Kkk5EwiLTbmg/SgSxqeuS2qsbYhwKJcnCoUAk5TW7GNFOWHViDMCDLjE7JB+hQUcZAGAUhzu
-EXFRAsC/VxQtFr2f9Pc=
+eDB77WERhKtLP3h3nS2w0UQFgyt6WtR3Gq+xZ25y8iQjgGcUPbJAHSc1MefzCPghDApH+Jpk3E/H
+0RrC61uKdHNrzmnMFLSFD1si5tIj924tLKlJyiCUZImahWTDUHfQwVXaY7Y7YTZjK8NSiERxZJEI
+ZNdi/b2yottWRS+VPcE=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

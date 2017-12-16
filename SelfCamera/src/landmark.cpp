@@ -49,6 +49,7 @@
 
 #include "view.h"
 #include "landmark.h"
+#include "imageutils.h"
 
 #include <ctime>
 
@@ -57,10 +58,26 @@ using namespace std;
 
 // ----------------------------------------------------------------------------------------
 
+void draw_hairband(camera_preview_data_s* frame, const full_object_detection shape, int id, imageinfo* imgarr)
+{
+	int h = ((shape.part(21)+shape.part(22)) - shape.part(33))(1);
+	int fore_l = shape.part(19)(0);
+	int fore_r = shape.part(24)(0);
+
+	int migan = fore_l - fore_r;
+
+	imageinfo imginfo = imgarr[id];
+
+	// draw left ear
+	_image_util_imgcpy(frame, &imgarr[0], h, fore_l);
+
+	// draw right ear
+	_image_util_imgcpy(frame, &imgarr[4], h, fore_r);
+}
+
 void draw_landmark(camera_preview_data_s* frame, const full_object_detection shape)
 {
-	//for(int i = 0; i < shape.num_parts(); i++)
-	for(int i = 0; i < 1; i++)
+	for(int i = 0; i < shape.num_parts(); i++)
 	{
 		int x = shape.part(i)(1);
 		int y = frame->height - shape.part(i)(0);

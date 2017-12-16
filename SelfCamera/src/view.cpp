@@ -48,11 +48,12 @@ static struct view_info {
 	int sticker;
 	int filter;
 	int cammode;
+	int fin;
 }s_info =
 {	.win = NULL, .conform = NULL, .navi = NULL, .navi_item = NULL,
 	.layout = NULL, .popup = NULL, .preview_canvas = NULL, .camera = NULL,
 	.camera_enabled = false, .media_content_folder = NULL,
-	.selected_mode_btn = 0, .sticker = 0, .filter = 0, .cammode = 1, // default front camera
+	.selected_mode_btn = 0, .sticker = 0, .filter = 0, .fin = 0, .cammode = 1, // default front camera
 };
 
 static Evas_Object *_app_navi_add(void);
@@ -60,8 +61,34 @@ static Evas_Object *_main_view_add(void);
 static Evas_Object *_view_create_bg(void);
 dlib::shape_predictor sp; /* shape predictor */
 int resolution[2] = { 176, 144 };
+static Evas_Object *sticker_btn;
 static imageinfo imgarr[STICKER_NUM];
 
+static void* enable_sticker(void* unused) {
+	s_info.fin = 1;
+	return NULL;
+}
+
+static void load_shape_predictor(void* unused1, Ecore_Thread *unused2) {
+	/* Load shape predictor */
+	const char* resource_path = app_get_resource_path();
+	char *file_path = (char *) malloc(sizeof(char) * BUFLEN);
+
+	/* Create a full path to get a shape predictor. */
+	snprintf(file_path, BUFLEN, "%s%s", resource_path,
+			"shape_predictor_68_face_landmarks.dat");
+
+	dlib::deserialize(file_path) >> sp;
+	ecore_main_loop_thread_safe_call_sync(enable_sticker, NULL);
+	free(file_path);
+}
+
+static void end_func(void *data, Ecore_Thread *thread) {
+	return;
+}
+
+static void _camera_face_detected_cb(camera_detected_face_s* faces, int count,
+		void* user_data);
 /**
  * @brief Creates essential objects: window, conformant and layout.
  * @param[in] user data pointer
@@ -102,21 +129,15 @@ Eina_Bool view_create(void *user_data) {
 	if (!view)
 		dlog_print(DLOG_ERROR, LOG_TAG, "main_view_add() failed");
 
-	/* Load shape predictor */
-	const char* resource_path = app_get_resource_path();
-	char *file_path = (char *) malloc(sizeof(char) * BUFLEN);
-
-	/* Create a full path to get a shape predictor. */
-	snprintf(file_path, BUFLEN, "%s%s", resource_path,
-			"shape_predictor_68_face_landmarks.dat");
-
-	dlib::deserialize(file_path) >> sp;
-	free(file_path);
-
 	_image_util_read_stickers(imgarr);
+
+	edje_object_part_object_get(sticker_btn, "face");
+	elm_object_disabled_set(sticker_btn, EINA_TRUE);
 
 	/* Show the window after main view is set up */
 	evas_object_show(s_info.win);
+
+	ecore_thread_run(load_shape_predictor, end_func, NULL, NULL);
 
 	return EINA_TRUE;
 }
@@ -205,6 +226,9 @@ bool view_resume(void) {
 		res = camera_start_preview(s_info.camera);
 		if (res == CAMERA_ERROR_NONE)
 			camera_start_focusing(s_info.camera, true);
+		if (s_info.sticker != 0)
+			camera_start_face_detection(s_info.camera, _camera_face_detected_cb,
+					&s_info.faces);
 	}
 	return true;
 }
@@ -784,41 +808,72 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 
 		draw_rudolph(frame, shape, imgarr);
 
-		/*
-		int x = shape.part(34)(1);
-		int y = frame->height - shape.part(34)(0);
-		if (imgarr != NULL) {
-			_image_util_imgcpy(frame, &imgarr[10], x, y);
-		}
-		*/
+//		draw_hairband(frame, shape, 0, imgarr);
 
-/*
-		switch (s_info.sticker) {
-		case 1:
-			sticker_rudolph(frame, shape, imgarr);
-			break;
-		case 2:
-			sticker_bald(frame, shape);
-			break;
-		case 3:
-			sticker_glasses(frame, shape);
-			break;
-		case 4:
-			sticker_hat(frame, shape);
-			break;
-		case 5:
-			sticker_mustache(frame, shape);
-			break;
-		case 6:
-			sticker_rabbit(frame, shape);
-			break;
-		case 7:
-			sticker_santa(frame, shape);
-			break;
-		default:
-			break;
+			/*
+			 int x = shape.part(34)(1);
+			 int y = frame->height - shape.part(34)(0);
+			 if (imgarr != NULL) {
+			 _image_util_imgcpy(frame, &imgarr[10], x, y);
+
+			 }
+			 */
+
+			/*
+			 switch (s_info.sticker) {
+			 case 1:
+			 sticker_rudolph(frame, shape);
+			 break;
+			 case 2:
+			 sticker_bald(frame, shape);
+			 break;
+			 case 3:
+			 sticker_glasses(frame, shape);
+			 break;
+			 case 4:
+			 sticker_hat(frame, shape);
+			 break;
+			 case 5:
+			 sticker_mustache(frame, shape);
+			 break;
+			 case 6:
+			 sticker_rabbit(frame, shape);
+			 break;
+			 case 7:
+			 sticker_santa(frame, shape);
+			 break;
+			 default:
+			 break;
+			 }
+			 */
+			/*
+			 switch (s_info.sticker) {
+			 case 1:
+			 sticker_rudolph(frame, shape, imgarr);
+			 break;
+			 case 2:
+			 sticker_bald(frame, shape);
+			 break;
+			 case 3:
+			 sticker_glasses(frame, shape);
+			 break;
+			 case 4:
+			 sticker_hat(frame, shape);
+			 break;
+			 case 5:
+			 sticker_mustache(frame, shape);
+			 break;
+			 case 6:
+			 sticker_rabbit(frame, shape);
+			 break;
+			 case 7:
+			 sticker_santa(frame, shape);
+			 break;
+			 default:
+			 break;
+			 }
+			 */
 		}
-		*/
 	}
 }
 
@@ -828,7 +883,13 @@ void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
 /*
 		int x = 50;
 		int y = 50;
-		_image_util_imgcpy(frame, &imgarr[6], x, y);
+		_image_util_imgcpy(frame, &imgarr[16], x, y);
+
+		x = 130;
+		y = 100;
+		_image_util_imgcpy(frame, &imgarr[15], x, y);
+
+		return;
 
 		x = 50;
 		y = 100;
@@ -860,7 +921,17 @@ void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
 
 static void _main_view_effect_button_cb(void) {
 	s_info.filter = (++s_info.filter) % MAX_FILTER;
-	switch(s_info.filter) {
+
+	camera_state_e state;
+	int error_code = camera_get_state(s_info.camera, &state);
+	if (CAMERA_STATE_PREVIEW == state) {
+		error_code = camera_unset_preview_cb(s_info.camera);
+		if (CAMERA_ERROR_NONE != error_code) {
+			return;
+		}
+		camera_stop_face_detection(s_info.camera);
+	}
+	switch (s_info.filter) {
 	case 0:
 		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_NONE);
 		break;
@@ -877,10 +948,19 @@ static void _main_view_effect_button_cb(void) {
 }
 
 static void _main_view_sticker_button_cb(void) {
-	s_info.sticker = (++s_info.sticker) % MAX_STICKER;
+	int error_code;
 
+	//sp is not unloaded
+	if (s_info.fin != 1) {
+		return;
+	}
+	s_info.sticker = (++s_info.sticker) % MAX_STICKER;
+	if (s_info.sticker == 0) {
+		camera_unset_preview_cb(s_info.camera);
+		camera_stop_face_detection(s_info.camera);
+	}
 	camera_state_e state;
-	int error_code = camera_get_state(s_info.camera, &state);
+	error_code = camera_get_state(s_info.camera, &state);
 	if (CAMERA_ERROR_NONE != error_code) {
 		DLOG_PRINT_ERROR("camera_get_state", error_code);
 		return;
@@ -924,6 +1004,7 @@ static void _main_view_sticker_button_cb(void) {
 	if (CAMERA_ERROR_NONE != error_code) {
 		DLOG_PRINT_ERROR("camera_start_preview", error_code);
 	}
+	camera_start_focusing(s_info.camera, true);
 
 	error_code = camera_start_face_detection(s_info.camera,
 			_camera_face_detected_cb, &s_info.faces);
@@ -979,7 +1060,7 @@ static Evas_Object *_main_view_add(void) {
 			_main_view_destroy_cb, NULL);
 
 	elm_layout_file_set(s_info.layout, _get_resource_path(EDJ_MAIN), GRP_MAIN);
-	elm_object_signal_emit(s_info.layout, "mouse,clicked,1", "timer_2");
+	//elm_object_signal_emit(s_info.layout, "mouse,clicked,1", "timer_2");
 
 	s_info.preview_canvas = evas_object_image_filled_add(
 			evas_object_evas_get(s_info.layout));

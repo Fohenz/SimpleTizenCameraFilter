@@ -490,7 +490,10 @@ src/landmark.o: ../src/landmark.cpp ../inc/view.h \
   /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media-content/media_bookmark.h \
   /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media-content/media_storage.h \
   /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media-content/media_face.h \
-  ../inc/landmark.h ../inc/dlib/image_processing.h \
+  ../inc/landmark.h ../inc/imageutils.h \
+  /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media/image_util.h \
+  /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media/image_util_type.h \
+  ../inc/dlib/image_processing.h \
   ../inc/dlib/image_processing/scan_image.h \
   ../inc/dlib/image_processing/scan_image_abstract.h \
   ../inc/dlib/image_processing/../matrix.h ../inc/dlib/matrix/matrix.h \

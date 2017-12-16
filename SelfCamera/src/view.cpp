@@ -61,15 +61,10 @@ static Evas_Object *_main_view_add(void);
 static Evas_Object *_view_create_bg(void);
 dlib::shape_predictor sp; /* shape predictor */
 int resolution[2] = { 176, 144 };
-<<<<<<< HEAD
-static imageinfo imgarr[10];
 static Evas_Object *sticker_btn;
-=======
 static imageinfo imgarr[STICKER_NUM];
->>>>>>> ebfceaed856873a8f5000e06d3c175f2fbeab10d
 
-static void* enable_sticker(void* unused)
-{
+static void* enable_sticker(void* unused) {
 	s_info.fin = 1;
 	return NULL;
 }
@@ -88,11 +83,9 @@ static void load_shape_predictor(void* unused1, Ecore_Thread *unused2) {
 	free(file_path);
 }
 
-static void end_func(void *data, Ecore_Thread *thread)
-{
-    return;
+static void end_func(void *data, Ecore_Thread *thread) {
+	return;
 }
-
 
 static void _camera_face_detected_cb(camera_detected_face_s* faces, int count,
 		void* user_data);
@@ -136,22 +129,7 @@ Eina_Bool view_create(void *user_data) {
 	if (!view)
 		dlog_print(DLOG_ERROR, LOG_TAG, "main_view_add() failed");
 
-<<<<<<< HEAD
-	_image_util_start_cb(&imgarr[0]);
-=======
-	/* Load shape predictor */
-	const char* resource_path = app_get_resource_path();
-	char *file_path = (char *) malloc(sizeof(char) * BUFLEN);
-
-	/* Create a full path to get a shape predictor. */
-	snprintf(file_path, BUFLEN, "%s%s", resource_path,
-			"shape_predictor_68_face_landmarks.dat");
-
-	dlib::deserialize(file_path) >> sp;
-	free(file_path);
-
 	_image_util_read_stickers(imgarr);
->>>>>>> ebfceaed856873a8f5000e06d3c175f2fbeab10d
 
 	edje_object_part_object_get(sticker_btn, "face");
 	elm_object_disabled_set(sticker_btn, EINA_TRUE);
@@ -828,80 +806,77 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 		dlib::full_object_detection shape = sp(img, s_info.faces[i]);
 		//draw_landmark(frame, shape);
 
-<<<<<<< HEAD
 		int x = shape.part(i)(1);
 		int y = frame->height - shape.part(i)(0);
 		if (imgarr != NULL && imgarr[0].size > 0) {
 			_image_util_imgcpy(frame, &imgarr[0], x, y);
-=======
+
 //		draw_hairband(frame, shape, 0, imgarr);
 
-		/*
-		int x = shape.part(34)(1);
-		int y = frame->height - shape.part(34)(0);
-		if (imgarr != NULL) {
-			_image_util_imgcpy(frame, &imgarr[10], x, y);
->>>>>>> ebfceaed856873a8f5000e06d3c175f2fbeab10d
-		}
-		*/
+			/*
+			 int x = shape.part(34)(1);
+			 int y = frame->height - shape.part(34)(0);
+			 if (imgarr != NULL) {
+			 _image_util_imgcpy(frame, &imgarr[10], x, y);
 
-<<<<<<< HEAD
-		/*
-		 switch (s_info.sticker) {
-		 case 1:
-		 sticker_rudolph(frame, shape);
-		 break;
-		 case 2:
-		 sticker_bald(frame, shape);
-		 break;
-		 case 3:
-		 sticker_glasses(frame, shape);
-		 break;
-		 case 4:
-		 sticker_hat(frame, shape);
-		 break;
-		 case 5:
-		 sticker_mustache(frame, shape);
-		 break;
-		 case 6:
-		 sticker_rabbit(frame, shape);
-		 break;
-		 case 7:
-		 sticker_santa(frame, shape);
-		 break;
-		 default:
-		 break;
-		 }
-		 */
-=======
-/*
-		switch (s_info.sticker) {
-		case 1:
-			sticker_rudolph(frame, shape, imgarr);
-			break;
-		case 2:
-			sticker_bald(frame, shape);
-			break;
-		case 3:
-			sticker_glasses(frame, shape);
-			break;
-		case 4:
-			sticker_hat(frame, shape);
-			break;
-		case 5:
-			sticker_mustache(frame, shape);
-			break;
-		case 6:
-			sticker_rabbit(frame, shape);
-			break;
-		case 7:
-			sticker_santa(frame, shape);
-			break;
-		default:
-			break;
+			 }
+			 */
+
+			/*
+			 switch (s_info.sticker) {
+			 case 1:
+			 sticker_rudolph(frame, shape);
+			 break;
+			 case 2:
+			 sticker_bald(frame, shape);
+			 break;
+			 case 3:
+			 sticker_glasses(frame, shape);
+			 break;
+			 case 4:
+			 sticker_hat(frame, shape);
+			 break;
+			 case 5:
+			 sticker_mustache(frame, shape);
+			 break;
+			 case 6:
+			 sticker_rabbit(frame, shape);
+			 break;
+			 case 7:
+			 sticker_santa(frame, shape);
+			 break;
+			 default:
+			 break;
+			 }
+			 */
+			/*
+			 switch (s_info.sticker) {
+			 case 1:
+			 sticker_rudolph(frame, shape, imgarr);
+			 break;
+			 case 2:
+			 sticker_bald(frame, shape);
+			 break;
+			 case 3:
+			 sticker_glasses(frame, shape);
+			 break;
+			 case 4:
+			 sticker_hat(frame, shape);
+			 break;
+			 case 5:
+			 sticker_mustache(frame, shape);
+			 break;
+			 case 6:
+			 sticker_rabbit(frame, shape);
+			 break;
+			 case 7:
+			 sticker_santa(frame, shape);
+			 break;
+			 default:
+			 break;
+			 }
+			 */
 		}
-		*/
->>>>>>> ebfceaed856873a8f5000e06d3c175f2fbeab10d
 	}
 }
 
@@ -912,8 +887,6 @@ void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
 		int x = 50;
 		int y = 50;
 		_image_util_imgcpy(frame, &imgarr[16], x, y);
-
-
 
 		x = 130;
 		y = 100;
@@ -977,7 +950,7 @@ static void _main_view_sticker_button_cb(void) {
 	int error_code;
 
 	//sp is not unloaded
-	if(s_info.fin != 1){
+	if (s_info.fin != 1) {
 		return;
 	}
 	s_info.sticker = (++s_info.sticker) % MAX_STICKER;

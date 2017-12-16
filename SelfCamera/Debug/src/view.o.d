@@ -491,6 +491,9 @@ src/view.o: ../src/view.cpp ../inc/view.h \
   /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media-content/media_storage.h \
   /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media-content/media_face.h \
   ../inc/selfcamera.h ../inc/view_defines.h ../inc/landmark.h \
+  ../inc/imageutils.h \
+  /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media/image_util.h \
+  /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media/image_util_type.h \
   ../inc/dlib/image_processing.h \
   ../inc/dlib/image_processing/scan_image.h \
   ../inc/dlib/image_processing/scan_image_abstract.h \
@@ -922,6 +925,4 @@ src/view.o: ../src/view.cpp ../inc/view.h \
   ../inc/dlib/image_processing/../threads.h \
   ../inc/dlib/image_processing/correlation_tracker.h \
   ../inc/dlib/image_processing/correlation_tracker_abstract.h \
-  ../inc/dlib/image_transforms.h ../inc/imageutils.h \
-  /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media/image_util.h \
-  /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media/image_util_type.h
+  ../inc/dlib/image_transforms.h

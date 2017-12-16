@@ -11,7 +11,7 @@
 #include <image_util.h>
 #include "view.h"
 
-#define STICKER_NUM 15
+#define STICKER_NUM 17
 
 typedef struct _imageinfo{
 	unsigned char* data;
@@ -30,5 +30,7 @@ void _image_util_read_stickers(imageinfo* imgarr);
 void _image_util_read_jpeg(imageinfo* imginfo, int id);
 
 const char *_map_colorspace(image_util_colorspace_e color_space);
+
+void _image_util_santacpy(camera_preview_data_s* frame, imageinfo* imginfo, int p, int q);
 
 #endif /* IMAGEUTILS_H_ */

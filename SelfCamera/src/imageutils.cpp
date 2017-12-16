@@ -9,9 +9,10 @@ static const char *image_util_stickers_filename[STICKER_NUM] = {
 "deer_left_big.jpg","deer_right_big.jpg","deer_nose_big.jpg",
 "deer_left_small.jpg", "deer_right_small.jpg", "deer_nose_small.jpg",
 "hat0.jpg","hat1.jpg","hat2.jpg",
-"beard.jpg", "deer_nose_s.jpg",
-"glasses.jpg", "santa.jpg",
-"deer_left_mid.jpg", "deer_right_mid.jpg"
+"beard_rot.jpg", "deer_nose_s.jpg",
+"glasses_rot.jpg", "santa_rot.jpg",
+"deer_left_mid.jpg", "deer_right_mid.jpg",
+"cat_left.jpg", "cat_right.jpg"
 };
 
 void _image_util_yuvcpy(camera_preview_data_s* frame, imageinfo* imginfo, int p, int q)
@@ -246,4 +247,68 @@ const char *_map_colorspace(image_util_colorspace_e color_space)
     case IMAGE_UTIL_COLORSPACE_NV61:
         return "IMAGE_UTIL_COLORSPACE_NV61";
     }
+}
+
+void _image_util_santacpy(camera_preview_data_s* frame, imageinfo* imginfo, int p, int q)
+{
+	int sh = imginfo->height;
+	int sw = imginfo->width;
+	int sy_size = sh*sw;
+
+	int fh = frame->height;
+	int fw = frame->width;
+
+	p -= sw/2;
+	q -= sh/2;
+	if(p%2 != 0) p++;
+	if(q%2 != 0) q++;
+
+	int pp = 0;
+	int qq = 0;
+	int pt = 0;
+	int ptpt = 0;
+	int pti = 0;
+	int ptipti = 0;
+	int ii = 0;
+	int jj = 0;
+
+	unsigned char y,u,v;
+
+	for(int j=0;j<sh;j++){
+		for(int i=0;i<sw;i++){
+			pp = p+i;
+			qq = q+j;
+			if(pp < 0 || qq < 0) continue;
+			pt = pp + qq*fw;
+			pti = i + j*sw;
+
+			pp /= 2;
+			qq /= 2;
+			ptpt = (pp + qq*fw/2)*2;
+			ii = i / 2;
+			jj = j / 2;
+			ptipti = (ii + jj*sw/2)*2 + sy_size;
+			y = imginfo->data[pti];
+			if(ptipti < imginfo->size){
+				u = imginfo->data[ptipti];
+				v = imginfo->data[ptipti+1];
+			} else
+			{
+				continue;
+			}
+
+			if(y < 30 && (u > 124 || u < 132) && (v > 124 || v < 132))
+			{
+				continue;
+			} else
+			{
+				if(pt < frame->data.double_plane.y_size && ptpt < frame->data.double_plane.uv_size)
+				{
+					frame->data.double_plane.y[pt] = imginfo->data[pti];
+					frame->data.double_plane.uv[ptpt] = v;
+					frame->data.double_plane.uv[ptpt+1] = u;
+				}
+			}
+		}
+	}
 }

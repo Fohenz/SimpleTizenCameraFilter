@@ -26,7 +26,7 @@
 #define STR_OK "OK"
 #define STR_FILE_PROTOCOL "file://"
 #define MAX_FILTER 4
-#define MAX_STICKER 7
+#define MAX_STICKER 10
 #define BUFLEN 256
 
 static struct view_info {
@@ -806,31 +806,23 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 		dlib::full_object_detection shape = sp(img, s_info.faces[i]);
 		// draw_landmark(frame, shape);
 
-		draw_rudolph(frame, shape, imgarr);
+//		draw_santa(frame, shape, imgarr);
 
-		/*
 		 switch (s_info.sticker) {
-		 case 1:
-			 draw_rudolph(frame, shape, imgarr);
-			 break;
 		 case 2:
 			 draw_nyan(frame, shape, imgarr);
 			 break;
-		 case 3:
-			 draw_santa(frame, shape, imgarr);
-			 break;
 		 case 4:
-			 break;
-		 case 5:
+		 	 draw_rudolph(frame, shape, imgarr);
 			 break;
 		 case 6:
+			 draw_santa(frame, shape, imgarr);
 			 break;
-		 case 7:
-			 break;
+		 case 8:
+			 draw_landmark(frame, shape);
 		 default:
 			 break;
 		 }
-		 */
 	}
 }
 

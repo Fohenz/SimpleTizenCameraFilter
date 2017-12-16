@@ -4,19 +4,23 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>jHe/4p0Tf3nnahWhDlIagMx9qJ0zcPweMx1svlFEwws=</DigestValue>
+<DigestValue>D3SJ3iUIVmNCXraW8w8UGwVUaN2dWjjlsaIRNx4JpCQ=</DigestValue>
 </Reference>
 <Reference URI="bin%2Fselfcamera">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>F4H1Dpg/XYKQQENUPNIhtvfB0pq67y1rUyCT0tyIbhs=</DigestValue>
+<DigestValue>9iXGCo52A2HcuvrnSCI+HXrI64H9npRTXXSEi+8sxXo=</DigestValue>
+</Reference>
+<Reference URI="lib%2Flibdlib.a">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>nyAVIN3Pk6ls6+lw3FKooAlwC4cFs8GLqAQGnHP4jBw=</DigestValue>
 </Reference>
 <Reference URI="res%2Fedc%2Fmain.edc">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>9pXcHcGTQoJmcPS0EMdmWFYjOm0GYx3l6hhQluV/CtA=</DigestValue>
+<DigestValue>DC09ZdugQs/LPs8eumVBM6EXaVdDTXfUvYsAbQlqrMo=</DigestValue>
 </Reference>
 <Reference URI="res%2Fedc%2Fmain.edj">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>QovBLOLxwpuAJWy7+XGGl0X0uiX27A8ePOMDKYc2Hak=</DigestValue>
+<DigestValue>6h1UO3w6CGJLJn4AzqLIlTdsR/vOa99UmE2+qU698Kk=</DigestValue>
 </Reference>
 <Reference URI="res%2Fimages%2Fmain%2Fback.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -62,19 +66,7 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>ZRNjaRTDHc0wkFo7KkPOabf5jXkqTzCFRziZR/prK84=</DigestValue>
 </Reference>
-<Reference URI="res%2Fimages%2Fmain%2Fcamera_mode_effect_dim.png">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ke3+ADBwXBrwTDRpzjWPFB29UGq6Yp3fJBhDlTmop0c=</DigestValue>
-</Reference>
 <Reference URI="res%2Fimages%2Fmain%2Fcamera_mode_effect_press.png">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>B25PEXqFq5TRwJIyLFW4+ERIjuPN+ZkrqDRDp07Jbwc=</DigestValue>
-</Reference>
-<Reference URI="res%2Fimages%2Fmain%2Fcamera_mode_efftect_dim.png">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ke3+ADBwXBrwTDRpzjWPFB29UGq6Yp3fJBhDlTmop0c=</DigestValue>
-</Reference>
-<Reference URI="res%2Fimages%2Fmain%2Fcamera_mode_efftect_press.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>B25PEXqFq5TRwJIyLFW4+ERIjuPN+ZkrqDRDp07Jbwc=</DigestValue>
 </Reference>
@@ -198,6 +190,10 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>tBG3R4vaEwE15xNidFT+fiZ9dV3yJOYvNKCos0iAMTU=</DigestValue>
 </Reference>
+<Reference URI="res%2Fshape_predictor_68_face_landmarks.dat">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>+9wsuA65qnp1hnLL/doyumMA7+m25seimf9+c2sRuS8=</DigestValue>
+</Reference>
 <Reference URI="res%2Fsounds%2Fsounds_count.mp3">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>BIrfTasIshnM0FKNodWbJmWfL14pmgpaJTFavImrc60=</DigestValue>
@@ -219,9 +215,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-UlCT+dp0hhera2BHof4bxRBjassTy291wMJD4SQuI2zQUyy2bs7r6ITE4Vd8gGucmJtPmmEjbbTn
-53q123L6TM07bLkDnjUe4S2Bu8Tf69uNlh6lIfBc53mhhhqVSfdfbz/lUY4a9QkqOVFdzEf8+WCd
-Knw9oTHbIqzxp4oS4OI=
+ib5KXBi33tVLI4eg5gFQTjRMm+XcX5ruzK52y1ZZr2jCTSN0nhoY8S9ENjUdwKp7URDk1EGPtC3i
+8S2A1k12TfQi6d9Nr6LDQEIws1Q4oaU/aCGEEoD+/D/dvEztcX9IHgIGIEnuZm/V81pDL5GKVMby
+cd3O5CoF9earM81GzBU=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

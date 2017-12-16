@@ -24,13 +24,6 @@ images
 {
    image: IMAGE_PATH"main/camera_btn_mode_up.png" COMP;
    image: IMAGE_PATH"main/camera_btn_mode_down.png" COMP;
-   image: IMAGE_PATH"main/timer_2.png" COMP;
-   image: IMAGE_PATH"main/timer_2_selected.png" COMP;
-   image: IMAGE_PATH"main/timer_5.png" COMP;
-   image: IMAGE_PATH"main/timer_5_selected.png" COMP;
-   image: IMAGE_PATH"main/timer_10.png" COMP;
-   image: IMAGE_PATH"main/timer_10_selected.png" COMP;
-
    image: IMAGE_PATH"main/camera_mode_effect.png" COMP;
    image: IMAGE_PATH"main/camera_mode_effect_press.png" COMP;
    image: IMAGE_PATH"main/camera_face_detection_on.png" COMP;
@@ -47,11 +40,6 @@ images
 
    image: IMAGE_PATH"main/none.png" COMP;
    image: IMAGE_PATH"main/transparent.png" COMP;
-
-   image: IMAGE_PATH"main/camera_effect_grayscale.png" COMP;
-   image: IMAGE_PATH"main/camera_effect_no.png" COMP;
-   image: IMAGE_PATH"main/camera_effect_sepia.png" COMP;
-   image: IMAGE_PATH"main/camera_effect_negative.png" COMP;
 } //images
 
 collections
@@ -174,11 +162,6 @@ collections
                inherit: "visible" 0.0;
                image.normal: IMAGE_PATH"main/camera_mode_effect_press.png";
             }
-            description
-            {
-               state: "pressed" 0.1;
-               inherit: "pressed" 0.0;
-            }
          }
 
          part 
@@ -208,91 +191,6 @@ collections
                image.normal: IMAGE_PATH"main/camera_face_detection_on_press.png";
             }
          }
-
-         part
-         {
-            name: "timer_2";
-            type: IMAGE;
-            description
-            {
-               fixed: 1 1;
-               rel1 { relative: 0.025 0.015; to: elm.swallow.content; }
-               rel2 { relative: 0.115 0.075; to: elm.swallow.content; }
-               min: 35 35;
-               max: 70 70;
-               visible: 1;
-               image.normal: IMAGE_PATH"main/timer_2.png";
-            }
-            description {
-               state: "selected" 0.0;
-               inherit: "default" 0.0;
-               image.normal: IMAGE_PATH"main/timer_2_selected.png";
-            }
-         } //part
-
-         part
-         {
-            name: "timer_5";
-            type: IMAGE;
-            description
-            {
-               fixed: 1 1;
-               rel1 { relative: 0.160 0.015; to: elm.swallow.content; }
-               rel2 { relative: 0.250 0.075; to: elm.swallow.content; }
-               min: 35 35;
-               max: 70 70;
-               visible: 1;
-               image.normal: IMAGE_PATH"main/timer_5.png";
-            }
-            description {
-               state: "selected" 0.0;
-               inherit: "default" 0.0;
-               image.normal: IMAGE_PATH"main/timer_5_selected.png";
-            }
-         } //part
-
-         part
-         {
-            name: "timer_10";
-            type: IMAGE;
-            description
-            {
-               fixed: 1 1;
-               rel1 { relative: 0.295 0.015; to: elm.swallow.content; }
-               rel2 { relative: 0.385 0.075; to: elm.swallow.content; }
-               min: 35 35;
-               max: 70 70;
-               visible: 1;
-               image.normal: IMAGE_PATH"main/timer_10.png";
-            }
-            description {
-               state: "selected" 0.0;
-               inherit: "default" 0.0;
-               image.normal: IMAGE_PATH"main/timer_10_selected.png";
-            }
-         } //part
-
-         part
-         {
-            name: "timer_text";
-            type: TEXT;
-            scale: 1;
-            description {
-               fixed: 1 1;
-               state: "default" 0.0;
-               rel1 { relative: 0.0 0.0; to: elm.swallow.content; }
-               rel2 { relative: 1.0 0.0; to: bottom_bar; }
-               color: 0 255 0 255;
-               text {
-                  font: FONT_NAME;
-                  size: 255;
-                  min: 1 1;
-                  align: 0.5 0.5;
-                  ellipsis: -1;
-               }
-            }
-         }
-
          part
          {
             name: "shutter_button";
@@ -346,112 +244,6 @@ collections
             }
          }
 
-         part
-         {
-            name: "origin";
-            type: IMAGE;
-            description
-            {
-               fixed: 1 1;
-               rel1 { relative: 0.025 0.665; to: elm.swallow.content; }
-               rel2 { relative: 0.115 0.764; to: elm.swallow.content; }
-               min: 35 35;
-               max: 70 70;
-               visible: 0;
-               image.normal: IMAGE_PATH"main/camera_effect_no.png";
-            }
-            description
-            {
-               state: "visible" 0.0;
-               inherit: "default" 0.0;
-               visible: 1;
-            }
-            description
-            {
-               state: "clicked" 0.0;
-               inherit: "visible" 0.0;
-            }
-         } //part
-
-         part
-         {
-            name: "sepia";
-            type: IMAGE;
-            description
-            {
-               fixed: 1 1;
-               rel1 { relative: 0.225 0.665; }
-               rel2 { relative: 0.315 0.764; }
-               min: 35 35;
-               max: 70 70;
-               visible: 0;
-               image.normal: IMAGE_PATH"main/camera_effect_sepia.png";
-            }
-            description 
-            {
-               state: "visible" 0.0;
-               inherit: "default" 0.0;
-               visible: 1;
-            }
-            description
-            {
-               state: "clicked" 0.0;
-               inherit: "visible" 0.0;
-            }
-         } //part
-         part
-         {
-            name: "grayscale";
-            type: IMAGE;
-            description
-            {
-               fixed: 1 1;
-               rel1 { relative: 0.325 0.665;}
-               rel2 { relative: 0.415 0.764;}
-               min: 35 35;
-               max: 70 70;
-               visible: 0;
-               image.normal: IMAGE_PATH"main/camera_effect_graysclae.png";
-            }
-            description 
-            {
-               state: "visible" 0.0;
-               inherit: "default" 0.0;
-               visible: 1;
-            }
-            description
-            {
-               state: "clicked" 0.0;
-               inherit: "visible" 0.0;
-            }
-         } //part
-         part
-         {
-            name: "negative";
-            type: IMAGE;
-            description
-            {
-               fixed: 1 1;
-               rel1 { relative: 0.425 0.665; }
-               rel2 { relative: 0.515 0.764; }
-               min: 35 35;
-               max: 70 70;
-               visible: 0;
-               image.normal: IMAGE_PATH"main/camera_effect_negative.png";
-            }
-            description 
-            {
-               state: "visible" 0.0;
-               inherit: "default" 0.0;
-               visible: 1;
-            }
-            description
-            {
-               state: "clicked" 0.0;
-               inherit: "visible" 0.0;
-            }
-         } //part
-
          programs
          {
             program
@@ -462,28 +254,7 @@ collections
                filter: "effect" "default";
                script {
                   set_state(PART:"effect", "visible", 0.0);
-                  set_state(PART: "origin", "visible", 0.0);
-                  set_state(PART: "negative", "visible", 0.0);
-                  set_state(PART: "grayscale", "visible", 0.0);
-                  set_state(PART: "sepia", "visible", 0.0);
-                  //set_state(PART:"filter_box", "visible", 0.0);
-                  //emit("camera_effect_clicked", "effect");
-               }
-            }
-            program
-            {
-               name: "clicked_effect2";
-               signal: "mouse,clicked,1";
-               source: "effect";
-               filter: "effect" "visible";
-               script {
-                  set_state(PART:"effect", "visible", 0.0);
-                  set_state(PART: "origin", "default", 0.0);
-                  set_state(PART: "negative", "default", 0.0);
-                  set_state(PART: "grayscale", "default", 0.0);
-                  set_state(PART: "sepia", "default", 0.0);
-                  //set_state(PART:"filter_box", "visible", 0.0);
-                  //emit("camera_effect_clicked", "effect");
+                  emit("camera_effect_clicked", "effect");
                }
             }
             program
@@ -493,7 +264,6 @@ collections
                source: "effect";
                script {
                   set_state(PART:"effect", "pressed", 0.0);
-                  //emit("camera_effect_pressed", "effect");
                }
             }
             program
@@ -504,31 +274,9 @@ collections
                filter: "effect" "pressed" 0.0;
                script {
                   set_state(PART:"effect", "visible", 0.0);
-                  set_state(PART: "origin", "visible", 0.0);
-                  set_state(PART: "negative", "visible", 0.0);
-                  set_state(PART: "grayscale", "visible", 0.0);
-                  set_state(PART: "sepia", "visible", 0.0);
-                  //emit("camera_effect_up", "effect");
+                  emit("camera_effect_clicked", "effect");
                }
             }
-            program
-            {
-               name: "up_effect";
-               signal: "mouse,up,*";
-               source: "effect";
-               filter: "effect" "pressed" 0.1;
-               script {
-                  set_state(PART:"effect", "visible", 0.0);
-                  set_state(PART: "origin", "default", 0.0);
-                  set_state(PART: "negative", "default", 0.0);
-                  set_state(PART: "grayscale", "default", 0.0);
-                  set_state(PART: "sepia", "default", 0.0);
-                  //emit("camera_effect_up", "effect");
-               }
-            }
-            
-            
-            
             program
             {
                name: "clicked_sticker";
@@ -536,10 +284,10 @@ collections
                source: "face";
                script {
                   set_state(PART:"face", "visible", 0.0);
-                  //set_state(PART:"sticker_box", "visible", 0.0);
-                  //emit("camera_sticker_clicked", "face");
+                  emit("camera_sticker_clicked", "face");
                }
             }
+
             program
             {
                name: "down_sticker";
@@ -547,7 +295,6 @@ collections
                source: "face";
                script {
                   set_state(PART:"face", "pressed", 0.0);
-                  //emit("camera_sticker_pressed", "face");
                }
             }
             program
@@ -557,8 +304,7 @@ collections
                source: "face";
                script {
                   set_state(PART:"face", "visible", 0.0);
-                  set_state(PART:"sticker_box", "visible", 0.0);
-                  //emit("camera_sticker_pressed", "face");
+                  emit("camera_sticker_clicked", "face");
                }
             }
             program
@@ -568,7 +314,7 @@ collections
                source: "change_camera";
                script {
                   set_state(PART:"change_camera", "default", 0.0);
-                  //emit("camera_change_clicked", "change_camera");
+                  emit("camera_change_clicked", "change_camera");
                }
             }
             program
@@ -578,7 +324,7 @@ collections
                source: "change_camera";
                script {
                   set_state(PART:"change_camera", "default", 0.0);
-                  //emit("camera_change_clicked", "change_camera");
+                  emit("camera_change_clicked", "change_camera");
                }
             }
             program
@@ -588,7 +334,6 @@ collections
                source: "change_camera";
                script {
                   set_state(PART:"change_camera", "pressed", 0.0);
-                  //emit("camera_change_clicked", "change_camera");
                }
             }
 
@@ -602,7 +347,6 @@ collections
                   set_state(PART:"btn_mode", "selected", 0.0);
                   set_state(PART:"effect", "visible", 0.0);
                   set_state(PART:"face", "visible", 0.0);
-                  emit("camera_btn_mode_clicked", "btn_mode");
                }
             }
             program
@@ -615,45 +359,8 @@ collections
                   set_state(PART:"btn_mode", "default", 0.0);
                   set_state(PART:"face", "default", 0.0);
                   set_state(PART:"effect", "default", 0.0);
-                  emit("camera_btn_mode_clicked", "btn_mode");
                }
             }           
-            program
-            {
-               name: "clicked_timer_2";
-               signal: "mouse,clicked,1";
-               source: "timer_2";
-               script {
-                  set_state(PART:"timer_2", "selected", 0.0);
-                  set_state(PART:"timer_5", "default", 0.0);
-                  set_state(PART:"timer_10", "default", 0.0);
-                  emit(EVENT_TIMER_2_SELECTED, "timer_2");
-               }
-            } //program
-            program
-            {
-               name: "clicked_timer_5";
-               signal: "mouse,clicked,1";
-               source: "timer_5";
-               script {
-                  set_state(PART:"timer_5", "selected", 0.0);
-                  set_state(PART:"timer_2", "default", 0.0);
-                  set_state(PART:"timer_10", "default", 0.0);
-                  emit(EVENT_TIMER_5_SELECTED, "timer_5");
-               }
-            } //program
-            program
-            {
-               name: "clicked_timer_10";
-               signal: "mouse,clicked,1";
-               source: "timer_10";
-               script {
-                  set_state(PART:"timer_10", "selected", 0.0);
-                  set_state(PART:"timer_2", "default", 0.0);
-                  set_state(PART:"timer_5", "default", 0.0);
-                  emit(EVENT_TIMER_10_SELECTED, "timer_10");
-               }
-            } //program
             program {
                name: "down_shutter";
                signal: "mouse,down,*";

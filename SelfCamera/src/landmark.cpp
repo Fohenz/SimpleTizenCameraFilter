@@ -58,6 +58,20 @@ using namespace std;
 
 // ----------------------------------------------------------------------------------------
 
+void draw_santa(camera_preview_data_s* frame, const full_object_detection shape, imageinfo* imgarr)
+{
+
+}
+
+void draw_nyan(camera_preview_data_s* frame, const full_object_detection shape, imageinfo* imgarr)
+{
+	int nose_x = frame->height - shape.part(34)(0);
+	int nose_y = shape.part(34)(1);
+
+	// draw nose
+	_image_util_imgcpy(frame, &imgarr[10], nose_y, nose_x);
+}
+
 void draw_rudolph(camera_preview_data_s* frame, const full_object_detection shape, imageinfo* imgarr)
 {
 	int h = ((shape.part(21)+shape.part(22)) - shape.part(33))(1);
@@ -76,7 +90,7 @@ void draw_rudolph(camera_preview_data_s* frame, const full_object_detection shap
 	_image_util_imgcpy(frame, &imgarr[4], h, fore_r);
 
 	// draw nose
-	_image_util_imgcpy(frame, &imgarr[5], nose_y, nose_x);
+	_image_util_imgcpy(frame, &imgarr[11], nose_y, nose_x);
 }
 
 void draw_landmark(camera_preview_data_s* frame, const full_object_detection shape)

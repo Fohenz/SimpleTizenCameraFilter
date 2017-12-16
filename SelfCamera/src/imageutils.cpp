@@ -9,7 +9,8 @@ static const char *image_util_stickers_filename[STICKER_NUM] = {
 "deer_left_big.jpg","deer_right_big.jpg","deer_nose_big.jpg",
 "deer_left_small.jpg", "deer_right_small.jpg", "deer_nose_small.jpg"
 "hat0.jpg","hat1.jpg","hat2.jpg",
-"deer_right_sRGB.jpg"
+"deer_right_sRGB.jpg", "beard.jpg", "deer_nose_s.jpg",
+"glasses.jpg", "santa.jpg"
 };
 
 void _image_util_imgcpy(camera_preview_data_s* frame, imageinfo* imginfo, int p, int q)

@@ -11,7 +11,7 @@
 #include <image_util.h>
 #include "view.h"
 
-#define STICKER_NUM 10
+#define STICKER_NUM 14
 
 typedef struct _imageinfo{
 	unsigned char* data;

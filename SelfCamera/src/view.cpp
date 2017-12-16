@@ -846,35 +846,7 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 			 break;
 			 }
 			 */
-			/*
-			 switch (s_info.sticker) {
-			 case 1:
-			 sticker_rudolph(frame, shape, imgarr);
-			 break;
-			 case 2:
-			 sticker_bald(frame, shape);
-			 break;
-			 case 3:
-			 sticker_glasses(frame, shape);
-			 break;
-			 case 4:
-			 sticker_hat(frame, shape);
-			 break;
-			 case 5:
-			 sticker_mustache(frame, shape);
-			 break;
-			 case 6:
-			 sticker_rabbit(frame, shape);
-			 break;
-			 case 7:
-			 sticker_santa(frame, shape);
-			 break;
-			 default:
-			 break;
-			 }
-			 */
 		}
-	}
 }
 
 void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {

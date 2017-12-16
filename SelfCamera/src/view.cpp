@@ -48,11 +48,12 @@ static struct view_info {
 	int sticker;
 	int filter;
 	int cammode;
+	int fin;
 }s_info =
 {	.win = NULL, .conform = NULL, .navi = NULL, .navi_item = NULL,
 	.layout = NULL, .popup = NULL, .preview_canvas = NULL, .camera = NULL,
 	.camera_enabled = false, .media_content_folder = NULL,
-	.selected_mode_btn = 0, .sticker = 0, .filter = 0, .cammode = 1, // default front camera
+	.selected_mode_btn = 0, .sticker = 0, .filter = 0, .fin = 0, .cammode = 1, // default front camera
 };
 
 static Evas_Object *_app_navi_add(void);
@@ -61,8 +62,36 @@ static Evas_Object *_view_create_bg(void);
 dlib::shape_predictor sp; /* shape predictor */
 int resolution[2] = { 176, 144 };
 static imageinfo imgarr[10];
+static Evas_Object *sticker_btn;
 
-static void _camera_face_detected_cb(camera_detected_face_s* faces, int count, void* user_data);
+static void* enable_sticker(void* unused)
+{
+	s_info.fin = 1;
+	return NULL;
+}
+
+static void load_shape_predictor(void* unused1, Ecore_Thread *unused2) {
+	/* Load shape predictor */
+	const char* resource_path = app_get_resource_path();
+	char *file_path = (char *) malloc(sizeof(char) * BUFLEN);
+
+	/* Create a full path to get a shape predictor. */
+	snprintf(file_path, BUFLEN, "%s%s", resource_path,
+			"shape_predictor_68_face_landmarks.dat");
+
+	dlib::deserialize(file_path) >> sp;
+	ecore_main_loop_thread_safe_call_sync(enable_sticker, NULL);
+	free(file_path);
+}
+
+static void end_func(void *data, Ecore_Thread *thread)
+{
+    return;
+}
+
+
+static void _camera_face_detected_cb(camera_detected_face_s* faces, int count,
+		void* user_data);
 /**
  * @brief Creates essential objects: window, conformant and layout.
  * @param[in] user data pointer
@@ -103,21 +132,15 @@ Eina_Bool view_create(void *user_data) {
 	if (!view)
 		dlog_print(DLOG_ERROR, LOG_TAG, "main_view_add() failed");
 
-	/* Load shape predictor */
-	const char* resource_path = app_get_resource_path();
-	char *file_path = (char *) malloc(sizeof(char) * BUFLEN);
-
-	/* Create a full path to get a shape predictor. */
-	snprintf(file_path, BUFLEN, "%s%s", resource_path,
-			"shape_predictor_68_face_landmarks.dat");
-
-	dlib::deserialize(file_path) >> sp;
-	free(file_path);
-
 	_image_util_start_cb(&imgarr[0]);
+
+	edje_object_part_object_get(sticker_btn, "face");
+	elm_object_disabled_set(sticker_btn, EINA_TRUE);
 
 	/* Show the window after main view is set up */
 	evas_object_show(s_info.win);
+
+	ecore_thread_run(load_shape_predictor, end_func, NULL, NULL);
 
 	return EINA_TRUE;
 }
@@ -206,9 +229,9 @@ bool view_resume(void) {
 		res = camera_start_preview(s_info.camera);
 		if (res == CAMERA_ERROR_NONE)
 			camera_start_focusing(s_info.camera, true);
-		if(s_info.sticker != 0)
-			camera_start_face_detection(s_info.camera,
-						_camera_face_detected_cb, &s_info.faces);
+		if (s_info.sticker != 0)
+			camera_start_face_detection(s_info.camera, _camera_face_detected_cb,
+					&s_info.faces);
 	}
 	return true;
 }
@@ -871,9 +894,12 @@ static void _main_view_effect_button_cb(void) {
 static void _main_view_sticker_button_cb(void) {
 	int error_code;
 
+	//sp is not unloaded
+	if(s_info.fin != 1){
+		return;
+	}
 	s_info.sticker = (++s_info.sticker) % MAX_STICKER;
-	if(s_info.sticker == 0)
-	{
+	if (s_info.sticker == 0) {
 		camera_unset_preview_cb(s_info.camera);
 		camera_stop_face_detection(s_info.camera);
 	}

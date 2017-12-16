@@ -1,6 +1,4 @@
 lib/libdlib.a__DEL__nyAVIN3Pk6ls6+lw3FKooAlwC4cFs8GLqAQGnHP4jBw=
-res/edc/main.edc__DEL__DC09ZdugQs/LPs8eumVBM6EXaVdDTXfUvYsAbQlqrMo=
-res/edc/main.edj__DEL__6h1UO3w6CGJLJn4AzqLIlTdsR/vOa99UmE2+qU698Kk=
 res/images/main/back.png__DEL__aAwiKVhAKLCBEt8tc988KERca4q1ToLh2Xy5FeVlSCk=
 res/images/main/bar.png__DEL__0iwXi+KS+IDTjFtaYGYGt4Ek9oecI6vWDQs+2g+jmd8=
 res/images/main/camera_btn_mode_down.png__DEL__6YF9awlwpyA2/yGianFyyrfXEIkzIMwk/9PgmMwU8Do=
@@ -47,6 +45,8 @@ res/shape_predictor_68_face_landmarks.dat__DEL__+9wsuA65qnp1hnLL/doyumMA7+m25sei
 res/sounds/sounds_count.mp3__DEL__BIrfTasIshnM0FKNodWbJmWfL14pmgpaJTFavImrc60=
 shared/res/selfcamera.png__DEL__1d0oEZHqPn+QzNzGIHwj9ODby6x9ggFs9uOsav6jPNs=
 tizen-manifest.xml__DEL__2YWoVoJ/Cty3CDIphKBysM0YfrPXde+BzspZYjJmfZs=
-author-signature.xml__DEL__69g+TxeG/avyXTIeqAglkz/kDfGrTBlVuUGcM0sBB80=
+author-signature.xml__DEL__lP1jbMuDaLv/PWHS1wxqx6MYx0oinEx/etQZmbfdVzI=
 res/rot.jpg__DEL__lwwCEvJgrc0a9yY/KenRGGrNwy/i8fj5apRZa3AAtbc=
-bin/selfcamera__DEL__oHlw1D0bXWn75H/OL7G8brm+dYm2sC9RGNP1o+4XWYg=
+res/edc/main.edc__DEL__DC09ZdugQs/LPs8eumVBM6EXaVdDTXfUvYsAbQlqrMo=
+res/edc/main.edj__DEL__6h1UO3w6CGJLJn4AzqLIlTdsR/vOa99UmE2+qU698Kk=
+bin/selfcamera__DEL__eJUjvXd6N01wxbvPNHyFHsJfLd4SzcljGaBI9dJ8lOU=

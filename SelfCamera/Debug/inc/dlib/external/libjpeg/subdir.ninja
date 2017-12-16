@@ -1,0 +1,228 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+
+cpptool = clang++
+cppflags = -DTIZEN_DEPRECATION -DDEPRECATION_WARNING -I"../inc" -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -target arm-tizen-linux-gnueabi -gcc-toolchain "/home/plasma/tizen-studio/tools/arm-linux-gnueabi-gcc-4.9/" -ccc-gcc-name arm-linux-gnueabi-g++ -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mtune=cortex-a8 -Wno-gnu -fPIE --sysroot="/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core" -mthumb -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/libxml2" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/SDL2" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/appcore-agent" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/appfw" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/attach-panel" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/badge" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/base" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/cairo" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/calendar-service2" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/cbhm" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/chromium-ewk" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ckm" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/contacts-svc" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/content" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/context-service" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/csr" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/dali" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/dali-toolkit" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/dbus-1.0" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/device" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/dlog" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ecore-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ecore-buffer-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ecore-con-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ecore-evas-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ecore-file-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ecore-imf-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ecore-imf-evas-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ecore-input-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ecore-input-evas-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ecore-ipc-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ector-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/e_dbus-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/edje-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/eet-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/efl-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/efl-extension" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/efreet-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/eina-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/eina-1/eina" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/eio-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/eldbus-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/elementary-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/embryo-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/emile-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/eo-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/eom" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ethumb-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ethumb-client-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/evas-1" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/feedback" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/fontconfig" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/freetype2" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/geofence" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/gio-unix-2.0" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/glib-2.0" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/harfbuzz" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/iotcon" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/json-glib-1.0" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/location" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/maps" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/media-content" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/messaging" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/metadata-editor" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/minicontrol" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/minizip" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/network" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/notification" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/nsd/" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/phonenumber-utils" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/sensor" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/service-adaptor" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/shortcut" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/storage" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/system" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/telephony" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/tzsh" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ui" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/ui-viewmgr" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/vulkan" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/web" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/widget_service" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/widget_viewer_dali" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/widget_viewer_evas" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/wifi-direct" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/include/yaca" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/lib/dbus-1.0/include" -I"/home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/lib/glib-2.0/include"
+
+build inc/dlib/external/libjpeg/jcapimin.o: build_cpp ../inc/dlib/external/libjpeg/jcapimin.cpp 
+build inc/dlib/external/libjpeg/jcapimin.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcapimin.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcapimin.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcapimin.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcapimin.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcapimin.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcapimin.o.cov: build_cov ../inc/dlib/external/libjpeg/jcapimin.cpp 
+build inc/dlib/external/libjpeg/jcapistd.o: build_cpp ../inc/dlib/external/libjpeg/jcapistd.cpp 
+build inc/dlib/external/libjpeg/jcapistd.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcapistd.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcapistd.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcapistd.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcapistd.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcapistd.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcapistd.o.cov: build_cov ../inc/dlib/external/libjpeg/jcapistd.cpp 
+build inc/dlib/external/libjpeg/jccoefct.o: build_cpp ../inc/dlib/external/libjpeg/jccoefct.cpp 
+build inc/dlib/external/libjpeg/jccoefct.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jccoefct.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jccoefct.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jccoefct.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jccoefct.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jccoefct.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jccoefct.o.cov: build_cov ../inc/dlib/external/libjpeg/jccoefct.cpp 
+build inc/dlib/external/libjpeg/jccolor.o: build_cpp ../inc/dlib/external/libjpeg/jccolor.cpp 
+build inc/dlib/external/libjpeg/jccolor.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jccolor.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jccolor.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jccolor.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jccolor.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jccolor.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jccolor.o.cov: build_cov ../inc/dlib/external/libjpeg/jccolor.cpp 
+build inc/dlib/external/libjpeg/jcdctmgr.o: build_cpp ../inc/dlib/external/libjpeg/jcdctmgr.cpp 
+build inc/dlib/external/libjpeg/jcdctmgr.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcdctmgr.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcdctmgr.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcdctmgr.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcdctmgr.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcdctmgr.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcdctmgr.o.cov: build_cov ../inc/dlib/external/libjpeg/jcdctmgr.cpp 
+build inc/dlib/external/libjpeg/jchuff.o: build_cpp ../inc/dlib/external/libjpeg/jchuff.cpp 
+build inc/dlib/external/libjpeg/jchuff.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jchuff.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jchuff.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jchuff.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jchuff.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jchuff.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jchuff.o.cov: build_cov ../inc/dlib/external/libjpeg/jchuff.cpp 
+build inc/dlib/external/libjpeg/jcinit.o: build_cpp ../inc/dlib/external/libjpeg/jcinit.cpp 
+build inc/dlib/external/libjpeg/jcinit.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcinit.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcinit.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcinit.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcinit.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcinit.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcinit.o.cov: build_cov ../inc/dlib/external/libjpeg/jcinit.cpp 
+build inc/dlib/external/libjpeg/jcmainct.o: build_cpp ../inc/dlib/external/libjpeg/jcmainct.cpp 
+build inc/dlib/external/libjpeg/jcmainct.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcmainct.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcmainct.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcmainct.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcmainct.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcmainct.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcmainct.o.cov: build_cov ../inc/dlib/external/libjpeg/jcmainct.cpp 
+build inc/dlib/external/libjpeg/jcmarker.o: build_cpp ../inc/dlib/external/libjpeg/jcmarker.cpp 
+build inc/dlib/external/libjpeg/jcmarker.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcmarker.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcmarker.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcmarker.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcmarker.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcmarker.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcmarker.o.cov: build_cov ../inc/dlib/external/libjpeg/jcmarker.cpp 
+build inc/dlib/external/libjpeg/jcmaster.o: build_cpp ../inc/dlib/external/libjpeg/jcmaster.cpp 
+build inc/dlib/external/libjpeg/jcmaster.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcmaster.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcmaster.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcmaster.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcmaster.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcmaster.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcmaster.o.cov: build_cov ../inc/dlib/external/libjpeg/jcmaster.cpp 
+build inc/dlib/external/libjpeg/jcomapi.o: build_cpp ../inc/dlib/external/libjpeg/jcomapi.cpp 
+build inc/dlib/external/libjpeg/jcomapi.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcomapi.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcomapi.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcomapi.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcomapi.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcomapi.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcomapi.o.cov: build_cov ../inc/dlib/external/libjpeg/jcomapi.cpp 
+build inc/dlib/external/libjpeg/jcparam.o: build_cpp ../inc/dlib/external/libjpeg/jcparam.cpp 
+build inc/dlib/external/libjpeg/jcparam.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcparam.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcparam.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcparam.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcparam.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcparam.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcparam.o.cov: build_cov ../inc/dlib/external/libjpeg/jcparam.cpp 
+build inc/dlib/external/libjpeg/jcphuff.o: build_cpp ../inc/dlib/external/libjpeg/jcphuff.cpp 
+build inc/dlib/external/libjpeg/jcphuff.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcphuff.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcphuff.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcphuff.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcphuff.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcphuff.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcphuff.o.cov: build_cov ../inc/dlib/external/libjpeg/jcphuff.cpp 
+build inc/dlib/external/libjpeg/jcprepct.o: build_cpp ../inc/dlib/external/libjpeg/jcprepct.cpp 
+build inc/dlib/external/libjpeg/jcprepct.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcprepct.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcprepct.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcprepct.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcprepct.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcprepct.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcprepct.o.cov: build_cov ../inc/dlib/external/libjpeg/jcprepct.cpp 
+build inc/dlib/external/libjpeg/jcsample.o: build_cpp ../inc/dlib/external/libjpeg/jcsample.cpp 
+build inc/dlib/external/libjpeg/jcsample.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jcsample.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jcsample.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jcsample.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jcsample.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jcsample.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jcsample.o.cov: build_cov ../inc/dlib/external/libjpeg/jcsample.cpp 
+build inc/dlib/external/libjpeg/jdapimin.o: build_cpp ../inc/dlib/external/libjpeg/jdapimin.cpp 
+build inc/dlib/external/libjpeg/jdapimin.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdapimin.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdapimin.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdapimin.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdapimin.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdapimin.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdapimin.o.cov: build_cov ../inc/dlib/external/libjpeg/jdapimin.cpp 
+build inc/dlib/external/libjpeg/jdapistd.o: build_cpp ../inc/dlib/external/libjpeg/jdapistd.cpp 
+build inc/dlib/external/libjpeg/jdapistd.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdapistd.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdapistd.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdapistd.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdapistd.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdapistd.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdapistd.o.cov: build_cov ../inc/dlib/external/libjpeg/jdapistd.cpp 
+build inc/dlib/external/libjpeg/jdatadst.o: build_cpp ../inc/dlib/external/libjpeg/jdatadst.cpp 
+build inc/dlib/external/libjpeg/jdatadst.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdatadst.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdatadst.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdatadst.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdatadst.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdatadst.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdatadst.o.cov: build_cov ../inc/dlib/external/libjpeg/jdatadst.cpp 
+build inc/dlib/external/libjpeg/jdatasrc.o: build_cpp ../inc/dlib/external/libjpeg/jdatasrc.cpp 
+build inc/dlib/external/libjpeg/jdatasrc.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdatasrc.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdatasrc.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdatasrc.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdatasrc.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdatasrc.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdatasrc.o.cov: build_cov ../inc/dlib/external/libjpeg/jdatasrc.cpp 
+build inc/dlib/external/libjpeg/jdcoefct.o: build_cpp ../inc/dlib/external/libjpeg/jdcoefct.cpp 
+build inc/dlib/external/libjpeg/jdcoefct.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdcoefct.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdcoefct.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdcoefct.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdcoefct.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdcoefct.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdcoefct.o.cov: build_cov ../inc/dlib/external/libjpeg/jdcoefct.cpp 
+build inc/dlib/external/libjpeg/jdcolor.o: build_cpp ../inc/dlib/external/libjpeg/jdcolor.cpp 
+build inc/dlib/external/libjpeg/jdcolor.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdcolor.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdcolor.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdcolor.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdcolor.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdcolor.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdcolor.o.cov: build_cov ../inc/dlib/external/libjpeg/jdcolor.cpp 
+build inc/dlib/external/libjpeg/jddctmgr.o: build_cpp ../inc/dlib/external/libjpeg/jddctmgr.cpp 
+build inc/dlib/external/libjpeg/jddctmgr.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jddctmgr.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jddctmgr.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jddctmgr.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jddctmgr.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jddctmgr.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jddctmgr.o.cov: build_cov ../inc/dlib/external/libjpeg/jddctmgr.cpp 
+build inc/dlib/external/libjpeg/jdhuff.o: build_cpp ../inc/dlib/external/libjpeg/jdhuff.cpp 
+build inc/dlib/external/libjpeg/jdhuff.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdhuff.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdhuff.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdhuff.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdhuff.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdhuff.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdhuff.o.cov: build_cov ../inc/dlib/external/libjpeg/jdhuff.cpp 
+build inc/dlib/external/libjpeg/jdinput.o: build_cpp ../inc/dlib/external/libjpeg/jdinput.cpp 
+build inc/dlib/external/libjpeg/jdinput.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdinput.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdinput.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdinput.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdinput.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdinput.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdinput.o.cov: build_cov ../inc/dlib/external/libjpeg/jdinput.cpp 
+build inc/dlib/external/libjpeg/jdmainct.o: build_cpp ../inc/dlib/external/libjpeg/jdmainct.cpp 
+build inc/dlib/external/libjpeg/jdmainct.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdmainct.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdmainct.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdmainct.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdmainct.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdmainct.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdmainct.o.cov: build_cov ../inc/dlib/external/libjpeg/jdmainct.cpp 
+build inc/dlib/external/libjpeg/jdmarker.o: build_cpp ../inc/dlib/external/libjpeg/jdmarker.cpp 
+build inc/dlib/external/libjpeg/jdmarker.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdmarker.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdmarker.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdmarker.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdmarker.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdmarker.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdmarker.o.cov: build_cov ../inc/dlib/external/libjpeg/jdmarker.cpp 
+build inc/dlib/external/libjpeg/jdmaster.o: build_cpp ../inc/dlib/external/libjpeg/jdmaster.cpp 
+build inc/dlib/external/libjpeg/jdmaster.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdmaster.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdmaster.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdmaster.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdmaster.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdmaster.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdmaster.o.cov: build_cov ../inc/dlib/external/libjpeg/jdmaster.cpp 
+build inc/dlib/external/libjpeg/jdmerge.o: build_cpp ../inc/dlib/external/libjpeg/jdmerge.cpp 
+build inc/dlib/external/libjpeg/jdmerge.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdmerge.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdmerge.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdmerge.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdmerge.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdmerge.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdmerge.o.cov: build_cov ../inc/dlib/external/libjpeg/jdmerge.cpp 
+build inc/dlib/external/libjpeg/jdphuff.o: build_cpp ../inc/dlib/external/libjpeg/jdphuff.cpp 
+build inc/dlib/external/libjpeg/jdphuff.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdphuff.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdphuff.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdphuff.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdphuff.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdphuff.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdphuff.o.cov: build_cov ../inc/dlib/external/libjpeg/jdphuff.cpp 
+build inc/dlib/external/libjpeg/jdpostct.o: build_cpp ../inc/dlib/external/libjpeg/jdpostct.cpp 
+build inc/dlib/external/libjpeg/jdpostct.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdpostct.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdpostct.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdpostct.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdpostct.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdpostct.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdpostct.o.cov: build_cov ../inc/dlib/external/libjpeg/jdpostct.cpp 
+build inc/dlib/external/libjpeg/jdsample.o: build_cpp ../inc/dlib/external/libjpeg/jdsample.cpp 
+build inc/dlib/external/libjpeg/jdsample.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jdsample.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jdsample.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jdsample.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jdsample.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jdsample.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jdsample.o.cov: build_cov ../inc/dlib/external/libjpeg/jdsample.cpp 
+build inc/dlib/external/libjpeg/jerror.o: build_cpp ../inc/dlib/external/libjpeg/jerror.cpp 
+build inc/dlib/external/libjpeg/jerror.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jerror.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jerror.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jerror.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jerror.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jerror.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jerror.o.cov: build_cov ../inc/dlib/external/libjpeg/jerror.cpp 
+build inc/dlib/external/libjpeg/jfdctflt.o: build_cpp ../inc/dlib/external/libjpeg/jfdctflt.cpp 
+build inc/dlib/external/libjpeg/jfdctflt.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jfdctflt.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jfdctflt.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jfdctflt.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jfdctflt.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jfdctflt.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jfdctflt.o.cov: build_cov ../inc/dlib/external/libjpeg/jfdctflt.cpp 
+build inc/dlib/external/libjpeg/jfdctfst.o: build_cpp ../inc/dlib/external/libjpeg/jfdctfst.cpp 
+build inc/dlib/external/libjpeg/jfdctfst.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jfdctfst.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jfdctfst.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jfdctfst.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jfdctfst.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jfdctfst.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jfdctfst.o.cov: build_cov ../inc/dlib/external/libjpeg/jfdctfst.cpp 
+build inc/dlib/external/libjpeg/jfdctint.o: build_cpp ../inc/dlib/external/libjpeg/jfdctint.cpp 
+build inc/dlib/external/libjpeg/jfdctint.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jfdctint.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jfdctint.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jfdctint.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jfdctint.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jfdctint.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jfdctint.o.cov: build_cov ../inc/dlib/external/libjpeg/jfdctint.cpp 
+build inc/dlib/external/libjpeg/jidctflt.o: build_cpp ../inc/dlib/external/libjpeg/jidctflt.cpp 
+build inc/dlib/external/libjpeg/jidctflt.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jidctflt.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jidctflt.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jidctflt.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jidctflt.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jidctflt.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jidctflt.o.cov: build_cov ../inc/dlib/external/libjpeg/jidctflt.cpp 
+build inc/dlib/external/libjpeg/jidctfst.o: build_cpp ../inc/dlib/external/libjpeg/jidctfst.cpp 
+build inc/dlib/external/libjpeg/jidctfst.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jidctfst.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jidctfst.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jidctfst.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jidctfst.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jidctfst.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jidctfst.o.cov: build_cov ../inc/dlib/external/libjpeg/jidctfst.cpp 
+build inc/dlib/external/libjpeg/jidctint.o: build_cpp ../inc/dlib/external/libjpeg/jidctint.cpp 
+build inc/dlib/external/libjpeg/jidctint.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jidctint.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jidctint.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jidctint.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jidctint.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jidctint.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jidctint.o.cov: build_cov ../inc/dlib/external/libjpeg/jidctint.cpp 
+build inc/dlib/external/libjpeg/jidctred.o: build_cpp ../inc/dlib/external/libjpeg/jidctred.cpp 
+build inc/dlib/external/libjpeg/jidctred.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jidctred.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jidctred.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jidctred.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jidctred.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jidctred.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jidctred.o.cov: build_cov ../inc/dlib/external/libjpeg/jidctred.cpp 
+build inc/dlib/external/libjpeg/jmemmgr.o: build_cpp ../inc/dlib/external/libjpeg/jmemmgr.cpp 
+build inc/dlib/external/libjpeg/jmemmgr.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jmemmgr.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jmemmgr.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jmemmgr.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jmemmgr.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jmemmgr.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jmemmgr.o.cov: build_cov ../inc/dlib/external/libjpeg/jmemmgr.cpp 
+build inc/dlib/external/libjpeg/jmemnobs.o: build_cpp ../inc/dlib/external/libjpeg/jmemnobs.cpp 
+build inc/dlib/external/libjpeg/jmemnobs.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jmemnobs.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jmemnobs.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jmemnobs.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jmemnobs.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jmemnobs.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jmemnobs.o.cov: build_cov ../inc/dlib/external/libjpeg/jmemnobs.cpp 
+build inc/dlib/external/libjpeg/jquant1.o: build_cpp ../inc/dlib/external/libjpeg/jquant1.cpp 
+build inc/dlib/external/libjpeg/jquant1.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jquant1.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jquant1.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jquant1.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jquant1.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jquant1.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jquant1.o.cov: build_cov ../inc/dlib/external/libjpeg/jquant1.cpp 
+build inc/dlib/external/libjpeg/jquant2.o: build_cpp ../inc/dlib/external/libjpeg/jquant2.cpp 
+build inc/dlib/external/libjpeg/jquant2.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jquant2.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jquant2.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jquant2.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jquant2.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jquant2.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jquant2.o.cov: build_cov ../inc/dlib/external/libjpeg/jquant2.cpp 
+build inc/dlib/external/libjpeg/jutils.o: build_cpp ../inc/dlib/external/libjpeg/jutils.cpp 
+build inc/dlib/external/libjpeg/jutils.o.ast: build_cpp_fast_ast ../inc/dlib/external/libjpeg/jutils.cpp 
+build $sareportdir/inc/dlib/external/libjpeg/jutils.o.xml: build_cpp_fast_sa inc/dlib/external/libjpeg/jutils.o.ast || externalFnMap.txt
+build inc/dlib/external/libjpeg/jutils.o.txt: build_cpp_api ../inc/dlib/external/libjpeg/jutils.cpp 
+build $coveragedir/inc/dlib/external/libjpeg/jutils.o.cov: build_cov ../inc/dlib/external/libjpeg/jutils.cpp 

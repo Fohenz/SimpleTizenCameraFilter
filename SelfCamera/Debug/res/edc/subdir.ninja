@@ -1,0 +1,9 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+
+edctool = edje_cc
+edcflags = -id "../edje/images" -id "/home/plasma/tizen-studio/tools/edc-editor/share/enventor/images" -sd "../edje/sounds" -sd "/home/plasma/tizen-studio/tools/edc-editor/share/enventor/sounds" -fd "../edje/fonts" -fd "/home/plasma/tizen-studio/tools/edc-editor/share/enventor/fonts"
+
+build res/edc/main.edj: build_edc ../res/edc/main.edc 

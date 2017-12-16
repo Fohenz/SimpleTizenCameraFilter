@@ -1,0 +1,4 @@
+set sysroot /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core
+set debug-file-directory /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/lib/debug
+set solib-search-path /home/plasma/git/FaceFilter/FaceFilter/Debug
+dir /home/plasma/tizen-studio/tools/smart-build-interface/../../platforms/tizen-3.0/mobile/rootstraps/mobile-3.0-device.core/usr/src/debug

@@ -5,7 +5,13 @@
 #define BUFLEN 256
 
 static char sample_file_path[BUFLEN];
-static const char *image_util_source_filename = "rot.jpg";
+static const char *image_util_stickers_filename[STICKER_NUM] = {
+"deer_left0.jpg","deer_left1.jpg","deer_left2.jpg","deer_left3.jpg",
+"deer_right0.jpg","deer_right1.jpg","deer_right2.jpg","deer_right3.jpg",
+"deer_nose0.jpg","deer_nose1.jpg","deer_nose2.jpg","deer_nose3.jpg",
+"hat0.jpg","hat1.jpg","hat2.jpg","hat3.jpg",
+"test.jpg"
+};
 
 void _image_util_imgcpy(camera_preview_data_s* frame, imageinfo* imginfo, int p, int q)
 {
@@ -55,7 +61,7 @@ void _image_util_imgcpy(camera_preview_data_s* frame, imageinfo* imginfo, int p,
 		for(int j=0;j<sh;j++)
 		{
 			if(pt+j < frame->data.double_plane.y_size && pti+j < sy_size)
-				if(imginfo->data[pti+j] <= 220)
+				//if(imginfo->data[pti+j] <= 250)
 					frame->data.double_plane.y[pt+j] = imginfo->data[pti+j];
 		}
 		pt += fw;
@@ -83,7 +89,15 @@ void _image_util_imgcpy(camera_preview_data_s* frame, imageinfo* imginfo, int p,
 #endif
 }
 
-void _image_util_start_cb(imageinfo* imginfo)
+void _image_util_read_stickers(imageinfo* imgarr)
+{
+	for(int i=0;i<STICKER_NUM;i++)
+	{
+		_image_util_read_jpeg(&imgarr[i], i);
+	}
+}
+
+void _image_util_read_jpeg(imageinfo* imginfo, int idx)
 {
     /* Decode the given JPEG file to the img_source buffer. */
     unsigned char *img_source = NULL;
@@ -91,7 +105,7 @@ void _image_util_start_cb(imageinfo* imginfo)
     unsigned int size_decode;
 
     char *resource_path = app_get_resource_path();
-    snprintf(sample_file_path, BUFLEN, "%s%s", resource_path, image_util_source_filename);
+    snprintf(sample_file_path, BUFLEN, "%s%s", resource_path, image_util_stickers_filename[idx]);
 
     int error_code = image_util_decode_jpeg(sample_file_path, IMAGE_UTIL_COLORSPACE_NV12, &img_source, &width, &height, &size_decode);
     if (error_code != IMAGE_UTIL_ERROR_NONE) {

@@ -11,7 +11,7 @@
 #include <image_util.h>
 #include "view.h"
 
-#define STICKER_NUM 14
+#define STICKER_NUM 15
 
 typedef struct _imageinfo{
 	unsigned char* data;
@@ -20,6 +20,8 @@ typedef struct _imageinfo{
 	int height;
 	int error;
 }imageinfo;
+
+void _image_util_yuvcpy(camera_preview_data_s* frame, imageinfo* imginfo, int p, int q);
 
 void _image_util_imgcpy(camera_preview_data_s* frame, imageinfo* imginfo, int p, int q);
 

@@ -808,45 +808,30 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 
 		draw_rudolph(frame, shape, imgarr);
 
-//		draw_hairband(frame, shape, 0, imgarr);
-
-			/*
-			 int x = shape.part(34)(1);
-			 int y = frame->height - shape.part(34)(0);
-			 if (imgarr != NULL) {
-			 _image_util_imgcpy(frame, &imgarr[10], x, y);
-
-			 }
-			 */
-
-			/*
-			 switch (s_info.sticker) {
-			 case 1:
-			 sticker_rudolph(frame, shape);
+		/*
+		 switch (s_info.sticker) {
+		 case 1:
+			 draw_rudolph(frame, shape, imgarr);
 			 break;
-			 case 2:
-			 sticker_bald(frame, shape);
+		 case 2:
+			 draw_nyan(frame, shape, imgarr);
 			 break;
-			 case 3:
-			 sticker_glasses(frame, shape);
+		 case 3:
+			 draw_santa(frame, shape, imgarr);
 			 break;
-			 case 4:
-			 sticker_hat(frame, shape);
+		 case 4:
 			 break;
-			 case 5:
-			 sticker_mustache(frame, shape);
+		 case 5:
 			 break;
-			 case 6:
-			 sticker_rabbit(frame, shape);
+		 case 6:
 			 break;
-			 case 7:
-			 sticker_santa(frame, shape);
+		 case 7:
 			 break;
-			 default:
+		 default:
 			 break;
-			 }
-			 */
-		}
+		 }
+		 */
+	}
 }
 
 void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {

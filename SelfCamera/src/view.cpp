@@ -394,6 +394,7 @@ static Eina_Bool _main_view_init_camera(void) {
  */
 static int _main_view_image_file_filter(const struct dirent *dir) {
 	return strncmp(dir->d_name, FILE_PREFIX, sizeof(FILE_PREFIX) - 1) == 0;
+
 }
 
 /**
@@ -837,6 +838,14 @@ void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
 
 static void _main_view_effect_button_cb(void) {
 	s_info.filter = (++s_info.filter) % MAX_FILTER;
+	switch(s_info.filter) {
+	case 0:
+		camera_attr_effect(s_info.camera, CAMERA_ATTR_EFFECT_NONE);
+		break;
+	case 1:
+		camera_attr_effect(s_info.camera, CAMERA_ATTR_EFFECT_NEGATIVE);
+		break;
+	}
 }
 
 static void _main_view_sticker_button_cb(void) {

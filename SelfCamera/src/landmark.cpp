@@ -60,37 +60,65 @@ using namespace std;
 
 void draw_santa(camera_preview_data_s* frame, const full_object_detection shape, imageinfo* imgarr)
 {
+	int hx = frame->height - shape.part(27)(0);
+	int hy = ((shape.part(21)+shape.part(22)) - shape.part(57))(1);
 
+	int jx = frame->height - shape.part(8)(0);
+	int jy = shape.part(8)(1);
+
+	int nose_x = frame->height - shape.part(27)(0);
+	int nose_y = shape.part(27)(1);
+
+	// beard
+	_image_util_santacpy(frame, &imgarr[12], jy, jx);
+
+	// hat
+	_image_util_yuvcpy(frame, &imgarr[6], hy, hx);
+
+	// glasses
+	_image_util_yuvcpy(frame, &imgarr[11], nose_y, nose_x);
 }
 
 void draw_nyan(camera_preview_data_s* frame, const full_object_detection shape, imageinfo* imgarr)
 {
-	int nose_x = frame->height - shape.part(34)(0);
-	int nose_y = shape.part(34)(1);
-
-	// draw nose
-	_image_util_imgcpy(frame, &imgarr[10], nose_y, nose_x);
-}
-
-void draw_rudolph(camera_preview_data_s* frame, const full_object_detection shape, imageinfo* imgarr)
-{
-	int h = ((shape.part(21)+shape.part(22)) - shape.part(33))(1);
+	int h = ((shape.part(21)+shape.part(22)) - shape.part(57))(1);
 	int fore_l = frame->height - shape.part(17)(0);
 	int fore_r = frame->height - shape.part(26)(0);
 
-	int nose_x = frame->height - shape.part(34)(0);
-	int nose_y = shape.part(34)(1);
+	int nose_x = frame->height - shape.part(33)(0);
+	int nose_y = shape.part(33)(1);
 
 	int migan = fore_l - fore_r;
 
 	// draw left ear
-	_image_util_imgcpy(frame, &imgarr[3], h, fore_l);
+	_image_util_yuvcpy(frame, &imgarr[15], h, fore_l);
 
 	// draw right ear
-	_image_util_imgcpy(frame, &imgarr[4], h, fore_r);
+	_image_util_yuvcpy(frame, &imgarr[16], h, fore_r);
 
 	// draw nose
-	_image_util_imgcpy(frame, &imgarr[11], nose_y, nose_x);
+	_image_util_yuvcpy(frame, &imgarr[9], nose_y, nose_x);
+}
+
+void draw_rudolph(camera_preview_data_s* frame, const full_object_detection shape, imageinfo* imgarr)
+{
+	int h = ((shape.part(21)+shape.part(22)) - shape.part(57))(1);
+	int fore_l = frame->height - shape.part(0)(0);
+	int fore_r = frame->height - shape.part(16)(0);
+
+	int nose_x = frame->height - shape.part(30)(0);
+	int nose_y = shape.part(30)(1);
+
+	int migan = fore_l - fore_r;
+
+	// draw left ear
+	_image_util_yuvcpy(frame, &imgarr[13], h, fore_l);
+
+	// draw right ear
+	_image_util_yuvcpy(frame, &imgarr[14], h, fore_r);
+
+	// draw nose
+	_image_util_yuvcpy(frame, &imgarr[10], nose_y, nose_x);
 }
 
 void draw_landmark(camera_preview_data_s* frame, const full_object_detection shape)

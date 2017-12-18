@@ -59,5 +59,6 @@ Evas_Object *view_create_win(const char *pkg_name);
 void view_pause(void);
 bool view_resume(void);
 void view_destroy(void);
+void _camera_preview_callback(camera_preview_data_s *frame, void *user_data);
 
 #endif

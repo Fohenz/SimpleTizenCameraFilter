@@ -60,5 +60,9 @@ void view_pause(void);
 bool view_resume(void);
 void view_destroy(void);
 void _camera_preview_callback(camera_preview_data_s *frame, void *user_data);
+static void _camera_face_detected_cb(camera_detected_face_s* faces, int count,
+		void* user_data);
+void _sticker_preview_callback(camera_preview_data_s *frame, void *user_data);
+void _filter_preview_callback(camera_preview_data_s *frame, void *user_data);
 
 #endif

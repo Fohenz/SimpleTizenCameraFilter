@@ -25,7 +25,7 @@
 #define STR_ERROR "Error"
 #define STR_OK "OK"
 #define STR_FILE_PROTOCOL "file://"
-#define MAX_FILTER 4
+#define MAX_FILTER 14
 #define MAX_STICKER 10
 #define BUFLEN 256
 
@@ -90,8 +90,6 @@ static void end_func(void *data, Ecore_Thread *thread) {
 	return;
 }
 
-static void _camera_face_detected_cb(camera_detected_face_s* faces, int count,
-		void* user_data);
 /**
  * @brief Creates essential objects: window, conformant and layout.
  * @param[in] user data pointer
@@ -208,7 +206,7 @@ void view_pause(void) {
 				res);
 		return;
 	}
-	if (cur_state == CAMERA_STATE_PREVIEW){
+	if (cur_state == CAMERA_STATE_PREVIEW) {
 		camera_stop_face_detection(s_info.camera);
 		camera_stop_preview(s_info.camera);
 		s_info.faces.clear();
@@ -253,20 +251,22 @@ bool view_resume(void) {
 			DLOG_PRINT_ERROR("camera_stop_preview", error_code);
 		}
 
-		error_code = camera_set_preview_cb(s_info.camera, _camera_preview_callback,
-				&s_info.faces);
-		if (CAMERA_ERROR_NONE != error_code) {
-			DLOG_PRINT_ERROR("camera_set_preview_cb", error_code);
-		}
-
 		error_code = camera_start_preview(s_info.camera);
 		if (CAMERA_ERROR_NONE != error_code) {
 			DLOG_PRINT_ERROR("camera_start_preview", error_code);
 		}
 		camera_start_focusing(s_info.camera, true);
 
-		if (s_info.flag_facerunning == true){
+		if (s_info.flag_facerunning == true) {
 			camera_start_face_detection(s_info.camera, _camera_face_detected_cb,
+					&s_info.faces);
+		}
+
+		if (s_info.filter != 0) {
+			camera_set_preview_cb(s_info.camera, _filter_preview_callback,
+					&s_info.faces);
+		} else {
+			camera_set_preview_cb(s_info.camera, _sticker_preview_callback,
 					&s_info.faces);
 		}
 	}
@@ -662,9 +662,7 @@ static size_t _main_view_get_file_path(char *file_path, size_t size) {
 	return chars;
 }
 
-static void _main_view_mycapture_cb(camera_preview_data_s *frame)
-{
-	FILE *file = NULL;
+static void _main_view_mycapture_cb(camera_preview_data_s *frame) {
 	int error_code;
 	size_t size;
 	char filename[PATH_MAX] = { '\0' };
@@ -674,23 +672,26 @@ static void _main_view_mycapture_cb(camera_preview_data_s *frame)
 		return;
 	}
 
-	for(int i=0;i<frame->data.double_plane.uv_size;i+=2){
+	for (int i = 0; i < frame->data.double_plane.uv_size; i += 2) {
 		unsigned char tmp = 0;
 		tmp = frame->data.double_plane.uv[i];
-		frame->data.double_plane.uv[i] = frame->data.double_plane.uv[i+1];
-		frame->data.double_plane.uv[i+1] = tmp;
+		frame->data.double_plane.uv[i] = frame->data.double_plane.uv[i + 1];
+		frame->data.double_plane.uv[i + 1] = tmp;
 	}
 
 	view_pause();
-	if(frame->format == CAMERA_PIXEL_FORMAT_NV12) {
+	if (frame->format == CAMERA_PIXEL_FORMAT_NV12) {
 		size = _main_view_get_file_path(filename, sizeof(filename));
 		if (size == 0) {
 			dlog_print(DLOG_ERROR, LOG_TAG, "_main_view_get_filename() failed");
 			return;
 		}
-		error_code = image_util_encode_jpeg(frame->data.encoded_plane.data, frame->width, frame->height, IMAGE_UTIL_COLORSPACE_NV12, 100, filename);
-		if(error_code != IMAGE_UTIL_ERROR_NONE){
-			dlog_print(DLOG_ERROR, LOG_TAG, "image_util_encode_jpeg() failed with %d", error_code);
+		error_code = image_util_encode_jpeg(frame->data.encoded_plane.data,
+				frame->width, frame->height, IMAGE_UTIL_COLORSPACE_NV12, 100,
+				filename);
+		if (error_code != IMAGE_UTIL_ERROR_NONE) {
+			dlog_print(DLOG_ERROR, LOG_TAG,
+					"image_util_encode_jpeg() failed with %d", error_code);
 			return;
 		}
 
@@ -699,63 +700,6 @@ static void _main_view_mycapture_cb(camera_preview_data_s *frame)
 	view_resume();
 }
 
-/**
- * @brief Callback called to get information about image data taken by the
- * camera once per frame while capturing.
- * @param[in] image The image data of the captured picture
- * @param[in] postview The image data of the "postview"
- * @param[in] thumbnail The image data of the thumbnail (it should be NULL
- * if the available thumbnail data does not exist)
- * @param[in] user_data The user data passed from the callback registration
- * function
- */
-static void _main_view_capture_cb(camera_image_data_s *image,
-		camera_image_data_s *postview, camera_image_data_s *thumbnail,
-		void *user_data) {
-	FILE *file = NULL;
-	size_t size;
-	char filename[PATH_MAX] = { '\0' };
-
-	if (!s_info.camera_enabled) {
-		dlog_print(DLOG_ERROR, LOG_TAG, "Camera hasn't been initialised.");
-		return;
-	}
-
-	view_pause();
-	if (image->format == CAMERA_PIXEL_FORMAT_JPEG) {
-		size = _main_view_get_file_path(filename, sizeof(filename));
-		if (size == 0) {
-			dlog_print(DLOG_ERROR, LOG_TAG, "_main_view_get_filename() failed");
-			return;
-		}
-
-		file = fopen(filename, "w+");
-		if (!file) {
-			dlog_print(DLOG_ERROR, LOG_TAG, "fopen() failed");
-			return;
-		}
-
-		size = fwrite(image->data, image->size, 1, file);
-		if (size != 1)
-			dlog_print(DLOG_ERROR, LOG_TAG, "fwrite() failed");
-
-		fclose(file);
-		_main_view_thumbnail_set(filename);
-	}
-}
-
-/**
- * @brief Callback called when the camera capturing completes.
- * @param[in] user_data The user data passed from the callback registration
- * function
- */
-static void _main_view_capture_completed_cb(void *data) {
-	if (!s_info.camera_enabled) {
-		dlog_print(DLOG_ERROR, LOG_TAG, "Camera hasn't been initialised.");
-		return;
-	}
-	view_resume();
-}
 /**
  * @brief Callback called on shutter button clicked event.
  * @param[in] data User data pointer
@@ -767,10 +711,6 @@ static void _main_view_shutter_button_cb(void *data, Evas_Object *obj,
 		const char *emission, const char *source) {
 	if (s_info.camera_enabled) {
 		s_info.flag_capturing = true;
-		/*
-		camera_start_capture(s_info.camera, _main_view_capture_cb,
-				_main_view_capture_completed_cb, NULL);
-				*/
 	} else {
 		dlog_print(DLOG_ERROR, LOG_TAG, "Camera hasn't been initialized.");
 	}
@@ -885,30 +825,30 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 	for (unsigned long i = 0; i < count; ++i) {
 		dlib::full_object_detection shape = sp(img, s_info.faces[i]);
 
-		 switch (s_info.sticker) {
-		 case 2:
-			 draw_nyan(frame, shape, imgarr);
-			 break;
-		 case 4:
-		 	 draw_rudolph(frame, shape, imgarr);
-			 break;
-		 case 6:
-			 draw_santa(frame, shape, imgarr);
-			 break;
-		 case 8:
-			 draw_landmark(frame, shape);
-		 default:
-			 break;
-		 }
+		switch (s_info.sticker) {
+		case 2:
+			draw_nyan(frame, shape, imgarr);
+			break;
+		case 4:
+			draw_rudolph(frame, shape, imgarr);
+			break;
+		case 6:
+			draw_santa(frame, shape, imgarr);
+			break;
+		case 8:
+			draw_landmark(frame, shape);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
-void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
+void _sticker_preview_callback(camera_preview_data_s *frame, void *user_data) {
 	if (frame->format == CAMERA_PIXEL_FORMAT_NV12
 			&& frame->num_of_planes == 2) {
 
-		if(s_info.flag_facerunning)
-		{
+		if (s_info.flag_facerunning) {
 			std::vector<dlib::rectangle> buf =
 					*((std::vector<dlib::rectangle>*) user_data);
 			size_t count = buf.size();
@@ -918,8 +858,7 @@ void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
 			}
 		}
 
-		if(s_info.flag_capturing)
-		{
+		if (s_info.flag_capturing) {
 			s_info.flag_capturing = false;
 			_main_view_mycapture_cb(frame);
 		}
@@ -930,28 +869,137 @@ void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
 	}
 }
 
+/*
+ void filter_1977(camera_preview_data_s *frame) {
+ //apply_filter(20, 10, 0);
+ //for (int i = 0; i < frame->data.double_plane.uv_size; i++)
+ //frame->data.double_plane.uv[i] = 128;
+ for (int i = 0; i < frame->data.double_plane.uv_size; i++) {
+ int val = frame->data.double_plane.uv[i];
+ if (i % 2) { // Cr
+ val = val*0.9;
+ if (val > 255)
+ val = 255;
+ if (val < 0)
+ val = 0;
+ frame->data.double_plane.uv[i] = val;
+ } else { //Cb
+ val = val*1.1;
+ if (val > 255)
+ val = 255;
+ if (val < 0)
+ val = 0;
+ frame->data.double_plane.uv[i] = val;
+ }
+ }
+ }*/
+
+void apply_filter(camera_preview_data_s* frame, double Cb, double Cr) {
+	camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_NONE);
+	for (int i = 0; i < frame->data.double_plane.uv_size; i++) {
+		int val = frame->data.double_plane.uv[i];
+		if (i % 2) { // Cr
+			val = val * Cr;
+			if (val > 255)
+				val = 255;
+			if (val < 0)
+				val = 0;
+			frame->data.double_plane.uv[i] = val;
+		} else { //Cb
+			val = val * Cb;
+			if (val > 255)
+				val = 255;
+			if (val < 0)
+				val = 0;
+			frame->data.double_plane.uv[i] = val;
+		}
+	}
+
+}
+
+void _filter_preview_callback(camera_preview_data_s *frame, void* user_data) {
+	if (frame->format == CAMERA_PIXEL_FORMAT_NV12
+			&& frame->num_of_planes == 2) {
+
+		switch (s_info.filter) {
+		case 4: // red1
+			apply_filter(frame, 0.95, 1.05);
+			break;
+		case 5:
+			apply_filter(frame, 0.9, 1.07);
+			break;
+		case 6:
+			apply_filter(frame, 0.85, 1.1);
+			break;
+		case 7: // blue
+			apply_filter(frame, 1.05, 0.95);
+			break;
+		case 8:
+			apply_filter(frame, 1.07, 0.9);
+			break;
+		case 9:
+			apply_filter(frame, 1.1, 0.85);
+			break;
+		case 10: // green
+			apply_filter(frame, 0.97, 0.96);
+			break;
+		case 11:
+			apply_filter(frame, 0.95, 0.95);
+			break;
+		case 12:
+			apply_filter(frame, 0.93, 0.93);
+			break;
+		}
+
+		if (s_info.flag_capturing) {
+			s_info.flag_capturing = false;
+			_main_view_mycapture_cb(frame);
+		}
+
+	} else {
+		dlog_print(DLOG_ERROR, LOG_TAG,
+				"This preview frame format is not supported!");
+	}
+}
+
 static void _main_view_effect_button_cb(void) {
+	if (s_info.sticker != 0)
+		return;
+
 	s_info.filter = (++s_info.filter) % MAX_FILTER;
 
 	camera_state_e state;
-	int error_code = camera_get_state(s_info.camera, &state);
+	camera_get_state(s_info.camera, &state);
 	if (CAMERA_STATE_PREVIEW == state) {
-		camera_stop_face_detection(s_info.camera);
-		s_info.flag_facerunning = false;
+		if (s_info.flag_facerunning == true) {
+			camera_stop_face_detection(s_info.camera);
+			s_info.flag_facerunning = false;
+		}
 	}
 	switch (s_info.filter) {
 	case 0:
 		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_NONE);
 		break;
 	case 1:
-		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_NEGATIVE);
+		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_MONO);
 		break;
 	case 2:
-		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_GRAY);
+		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_NEGATIVE);
 		break;
 	case 3:
 		camera_attr_set_effect(s_info.camera, CAMERA_ATTR_EFFECT_SEPIA);
 		break;
+	default:
+		break;
+	}
+
+	if (s_info.filter > 3) {
+		camera_unset_preview_cb(s_info.camera);
+		int error_code = camera_set_preview_cb(s_info.camera,
+				_filter_preview_callback, &s_info.faces);
+		if (CAMERA_ERROR_NONE != error_code) {
+			DLOG_PRINT_ERROR("camera_set_preview_cb", error_code);
+		}
 	}
 }
 
@@ -959,15 +1007,25 @@ static void _main_view_sticker_button_cb(void) {
 	int error_code;
 
 	//sp is not unloaded
-	if (s_info.fin != 1) {
+	if (s_info.fin != 1 || s_info.filter != 0) {
 		return;
 	}
 
 	s_info.sticker = (++s_info.sticker) % MAX_STICKER;
+
+	if (s_info.sticker != 0) {
+		camera_unset_preview_cb(s_info.camera);
+		int error_code = camera_set_preview_cb(s_info.camera,
+				_sticker_preview_callback, &s_info.faces);
+		if (CAMERA_ERROR_NONE != error_code) {
+			DLOG_PRINT_ERROR("camera_set_preview_cb", error_code);
+		}
+	}
+
 	if (s_info.sticker == 0 && s_info.flag_facerunning == true) {
 		camera_stop_face_detection(s_info.camera);
 		s_info.flag_facerunning = false;
-	} else if (s_info.flag_facerunning == false){
+	} else if (s_info.flag_facerunning == false) {
 		error_code = camera_start_face_detection(s_info.camera,
 				_camera_face_detected_cb, &s_info.faces);
 		if (CAMERA_ERROR_NONE != error_code) {

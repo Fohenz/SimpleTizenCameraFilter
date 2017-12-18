@@ -49,11 +49,14 @@ static struct view_info {
 	int filter;
 	int cammode;
 	int fin;
+	Eina_Bool flag_capturing;
+	Eina_Bool flag_facerunning;
 }s_info =
 {	.win = NULL, .conform = NULL, .navi = NULL, .navi_item = NULL,
 	.layout = NULL, .popup = NULL, .preview_canvas = NULL, .camera = NULL,
 	.camera_enabled = false, .media_content_folder = NULL,
 	.selected_mode_btn = 0, .sticker = 0, .filter = 0, .fin = 0, .cammode = 1, // default front camera
+	.flag_capturing = false, .flag_facerunning = false,
 };
 
 static Evas_Object *_app_navi_add(void);
@@ -205,8 +208,11 @@ void view_pause(void) {
 				res);
 		return;
 	}
-	if (cur_state == CAMERA_STATE_PREVIEW)
+	if (cur_state == CAMERA_STATE_PREVIEW){
+		camera_stop_face_detection(s_info.camera);
 		camera_stop_preview(s_info.camera);
+		s_info.faces.clear();
+	}
 }
 
 /**
@@ -223,12 +229,46 @@ bool view_resume(void) {
 		return false;
 	}
 	if (cur_state != CAMERA_STATE_PREVIEW) {
-		res = camera_start_preview(s_info.camera);
-		if (res == CAMERA_ERROR_NONE)
-			camera_start_focusing(s_info.camera, true);
-		if (s_info.sticker != 0)
+		/*
+		 * * The following actions (stop->start -> stop -> start preview) are required
+		 * * to deal with a bug related to the camera brightness changes
+		 * * (without applying this workaround, after taking a photo,
+		 * * the changes of the camera preview brightness are not visible).
+		 */
+
+		int error_code = camera_unset_preview_cb(s_info.camera);
+		if (CAMERA_ERROR_NONE != error_code) {
+			DLOG_PRINT_ERROR("camera_unset_preview_cb", error_code);
+		}
+		error_code = camera_stop_preview(s_info.camera);
+		if (CAMERA_ERROR_NONE != error_code) {
+			DLOG_PRINT_ERROR("camera_stop_preview", error_code);
+		}
+		error_code = camera_start_preview(s_info.camera);
+		if (CAMERA_ERROR_NONE != error_code) {
+			DLOG_PRINT_ERROR("camera_start_preview", error_code);
+		}
+		error_code = camera_stop_preview(s_info.camera);
+		if (CAMERA_ERROR_NONE != error_code) {
+			DLOG_PRINT_ERROR("camera_stop_preview", error_code);
+		}
+
+		error_code = camera_set_preview_cb(s_info.camera, _camera_preview_callback,
+				&s_info.faces);
+		if (CAMERA_ERROR_NONE != error_code) {
+			DLOG_PRINT_ERROR("camera_set_preview_cb", error_code);
+		}
+
+		error_code = camera_start_preview(s_info.camera);
+		if (CAMERA_ERROR_NONE != error_code) {
+			DLOG_PRINT_ERROR("camera_start_preview", error_code);
+		}
+		camera_start_focusing(s_info.camera, true);
+
+		if (s_info.flag_facerunning == true){
 			camera_start_face_detection(s_info.camera, _camera_face_detected_cb,
 					&s_info.faces);
+		}
 	}
 	return true;
 }
@@ -622,6 +662,43 @@ static size_t _main_view_get_file_path(char *file_path, size_t size) {
 	return chars;
 }
 
+static void _main_view_mycapture_cb(camera_preview_data_s *frame)
+{
+	FILE *file = NULL;
+	int error_code;
+	size_t size;
+	char filename[PATH_MAX] = { '\0' };
+
+	if (!s_info.camera_enabled) {
+		dlog_print(DLOG_ERROR, LOG_TAG, "Camera hasn't been initialized.");
+		return;
+	}
+
+	for(int i=0;i<frame->data.double_plane.uv_size;i+=2){
+		unsigned char tmp = 0;
+		tmp = frame->data.double_plane.uv[i];
+		frame->data.double_plane.uv[i] = frame->data.double_plane.uv[i+1];
+		frame->data.double_plane.uv[i+1] = tmp;
+	}
+
+	view_pause();
+	if(frame->format == CAMERA_PIXEL_FORMAT_NV12) {
+		size = _main_view_get_file_path(filename, sizeof(filename));
+		if (size == 0) {
+			dlog_print(DLOG_ERROR, LOG_TAG, "_main_view_get_filename() failed");
+			return;
+		}
+		error_code = image_util_encode_jpeg(frame->data.encoded_plane.data, frame->width, frame->height, IMAGE_UTIL_COLORSPACE_NV12, 100, filename);
+		if(error_code != IMAGE_UTIL_ERROR_NONE){
+			dlog_print(DLOG_ERROR, LOG_TAG, "image_util_encode_jpeg() failed with %d", error_code);
+			return;
+		}
+
+		_main_view_thumbnail_set(filename);
+	}
+	view_resume();
+}
+
 /**
  * @brief Callback called to get information about image data taken by the
  * camera once per frame while capturing.
@@ -689,8 +766,11 @@ static void _main_view_capture_completed_cb(void *data) {
 static void _main_view_shutter_button_cb(void *data, Evas_Object *obj,
 		const char *emission, const char *source) {
 	if (s_info.camera_enabled) {
+		s_info.flag_capturing = true;
+		/*
 		camera_start_capture(s_info.camera, _main_view_capture_cb,
 				_main_view_capture_completed_cb, NULL);
+				*/
 	} else {
 		dlog_print(DLOG_ERROR, LOG_TAG, "Camera hasn't been initialized.");
 	}
@@ -804,9 +884,6 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 	// each face we detected.
 	for (unsigned long i = 0; i < count; ++i) {
 		dlib::full_object_detection shape = sp(img, s_info.faces[i]);
-		// draw_landmark(frame, shape);
-
-//		draw_santa(frame, shape, imgarr);
 
 		 switch (s_info.sticker) {
 		 case 2:
@@ -829,37 +906,22 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 void _camera_preview_callback(camera_preview_data_s *frame, void *user_data) {
 	if (frame->format == CAMERA_PIXEL_FORMAT_NV12
 			&& frame->num_of_planes == 2) {
-/*
-		int x = 50;
-		int y = 50;
-		_image_util_imgcpy(frame, &imgarr[16], x, y);
 
-		x = 130;
-		y = 100;
-		_image_util_imgcpy(frame, &imgarr[15], x, y);
+		if(s_info.flag_facerunning)
+		{
+			std::vector<dlib::rectangle> buf =
+					*((std::vector<dlib::rectangle>*) user_data);
+			size_t count = buf.size();
+			/* get face landmark */
+			if (count > 0) {
+				face_landmark(frame, count);
+			}
+		}
 
-		return;
-
-		x = 50;
-		y = 100;
-		_image_util_imgcpy(frame, &imgarr[7], x, y);
-
-		x = 100;
-		y = 50;
-		_image_util_imgcpy(frame, &imgarr[8], x, y);
-
-		x = 100;
-		y = 100;
-		_image_util_imgcpy(frame, &imgarr[2], x, y);
-
-		return;
-*/
-		std::vector<dlib::rectangle> buf =
-				*((std::vector<dlib::rectangle>*) user_data);
-		size_t count = buf.size();
-		/* get face landmark */
-		if (count > 0) {
-			face_landmark(frame, count);
+		if(s_info.flag_capturing)
+		{
+			s_info.flag_capturing = false;
+			_main_view_mycapture_cb(frame);
 		}
 	} else {
 		dlog_print(DLOG_ERROR, LOG_TAG,
@@ -874,11 +936,8 @@ static void _main_view_effect_button_cb(void) {
 	camera_state_e state;
 	int error_code = camera_get_state(s_info.camera, &state);
 	if (CAMERA_STATE_PREVIEW == state) {
-		error_code = camera_unset_preview_cb(s_info.camera);
-		if (CAMERA_ERROR_NONE != error_code) {
-			return;
-		}
 		camera_stop_face_detection(s_info.camera);
+		s_info.flag_facerunning = false;
 	}
 	switch (s_info.filter) {
 	case 0:
@@ -903,63 +962,19 @@ static void _main_view_sticker_button_cb(void) {
 	if (s_info.fin != 1) {
 		return;
 	}
+
 	s_info.sticker = (++s_info.sticker) % MAX_STICKER;
-	if (s_info.sticker == 0) {
-		camera_unset_preview_cb(s_info.camera);
+	if (s_info.sticker == 0 && s_info.flag_facerunning == true) {
 		camera_stop_face_detection(s_info.camera);
-	}
-	camera_state_e state;
-	error_code = camera_get_state(s_info.camera, &state);
-	if (CAMERA_ERROR_NONE != error_code) {
-		DLOG_PRINT_ERROR("camera_get_state", error_code);
-		return;
-	}
-
-	if (CAMERA_STATE_PREVIEW == state) {
-		/*
-		 * * The following actions (stop->start -> stop -> start preview) are required
-		 * * to deal with a bug related to the camera brightness changes
-		 * * (without applying this workaround, after taking a photo,
-		 * * the changes of the camera preview brightness are not visible).
-		 */
-
-		error_code = camera_unset_preview_cb(s_info.camera);
+		s_info.flag_facerunning = false;
+	} else if (s_info.flag_facerunning == false){
+		error_code = camera_start_face_detection(s_info.camera,
+				_camera_face_detected_cb, &s_info.faces);
 		if (CAMERA_ERROR_NONE != error_code) {
-			DLOG_PRINT_ERROR("camera_unset_preview_cb", error_code);
+			DLOG_PRINT_ERROR("camera_start_face_detection error", error_code);
+			return;
 		}
-		error_code = camera_stop_preview(s_info.camera);
-		if (CAMERA_ERROR_NONE != error_code) {
-			DLOG_PRINT_ERROR("camera_stop_preview", error_code);
-		}
-
-		error_code = camera_start_preview(s_info.camera);
-		if (CAMERA_ERROR_NONE != error_code) {
-			DLOG_PRINT_ERROR("camera_start_preview", error_code);
-		}
-
-		error_code = camera_stop_preview(s_info.camera);
-		if (CAMERA_ERROR_NONE != error_code) {
-			DLOG_PRINT_ERROR("camera_stop_preview", error_code);
-		}
-	}
-
-	error_code = camera_set_preview_cb(s_info.camera, _camera_preview_callback,
-			&s_info.faces);
-	if (CAMERA_ERROR_NONE != error_code) {
-		DLOG_PRINT_ERROR("camera_set_preview_cb", error_code);
-	}
-
-	error_code = camera_start_preview(s_info.camera);
-	if (CAMERA_ERROR_NONE != error_code) {
-		DLOG_PRINT_ERROR("camera_start_preview", error_code);
-	}
-	camera_start_focusing(s_info.camera, true);
-
-	error_code = camera_start_face_detection(s_info.camera,
-			_camera_face_detected_cb, &s_info.faces);
-	if (CAMERA_ERROR_NONE != error_code) {
-		DLOG_PRINT_ERROR("camera_start_face_detection error", error_code);
-		return;
+		s_info.flag_facerunning = true;
 	}
 }
 

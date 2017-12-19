@@ -49,14 +49,30 @@ static struct view_info {
 	int filter;
 	int cammode;
 	int fin;
+	int motion;
+	int cooltime;
 	Eina_Bool flag_capturing;
 	Eina_Bool flag_facerunning;
 }s_info =
-{	.win = NULL, .conform = NULL, .navi = NULL, .navi_item = NULL,
-	.layout = NULL, .popup = NULL, .preview_canvas = NULL, .camera = NULL,
-	.camera_enabled = false, .media_content_folder = NULL,
-	.selected_mode_btn = 0, .sticker = 0, .filter = 0, .fin = 0, .cammode = 1, // default front camera
-	.flag_capturing = false, .flag_facerunning = false,
+{	.win = NULL,
+	.conform = NULL,
+	.navi = NULL,
+	.navi_item = NULL,
+	.layout = NULL,
+	.popup = NULL,
+	.preview_canvas = NULL,
+	.camera = NULL,
+	.camera_enabled = false,
+	.media_content_folder = NULL,
+	.selected_mode_btn = 0,
+	.sticker = 0,
+	.filter = 0,
+	.fin = 0,
+	.cammode = 1, // default front camera
+	.motion = 0,
+	.cooltime = 2,
+	.flag_capturing = false,
+	.flag_facerunning = false,
 };
 
 static Evas_Object *_app_navi_add(void);
@@ -262,11 +278,11 @@ bool view_resume(void) {
 					&s_info.faces);
 		}
 
-		if (s_info.filter != 0) {
-			camera_set_preview_cb(s_info.camera, _filter_preview_callback,
+		if (s_info.sticker != 0) {
+			camera_set_preview_cb(s_info.camera, _sticker_preview_callback,
 					&s_info.faces);
 		} else {
-			camera_set_preview_cb(s_info.camera, _sticker_preview_callback,
+			camera_set_preview_cb(s_info.camera, _filter_preview_callback,
 					&s_info.faces);
 		}
 	}
@@ -852,6 +868,7 @@ void _sticker_preview_callback(camera_preview_data_s *frame, void *user_data) {
 			std::vector<dlib::rectangle> buf =
 					*((std::vector<dlib::rectangle>*) user_data);
 			size_t count = buf.size();
+
 			/* get face landmark */
 			if (count > 0) {
 				face_landmark(frame, count);
@@ -963,9 +980,6 @@ void _filter_preview_callback(camera_preview_data_s *frame, void* user_data) {
 }
 
 static void _main_view_effect_button_cb(void) {
-	if (s_info.sticker != 0)
-		return;
-
 	s_info.filter = (++s_info.filter) % MAX_FILTER;
 
 	camera_state_e state;
@@ -974,6 +988,15 @@ static void _main_view_effect_button_cb(void) {
 		if (s_info.flag_facerunning == true) {
 			camera_stop_face_detection(s_info.camera);
 			s_info.flag_facerunning = false;
+
+			if (s_info.sticker != 0) {
+				camera_unset_preview_cb(s_info.camera);
+				int error_code = camera_set_preview_cb(s_info.camera,
+						_filter_preview_callback, &s_info.faces);
+				if (CAMERA_ERROR_NONE != error_code) {
+					DLOG_PRINT_ERROR("camera_set_preview_cb", error_code);
+				}
+			}
 		}
 	}
 	switch (s_info.filter) {
@@ -993,21 +1016,13 @@ static void _main_view_effect_button_cb(void) {
 		break;
 	}
 
-	if (s_info.filter > 3) {
-		camera_unset_preview_cb(s_info.camera);
-		int error_code = camera_set_preview_cb(s_info.camera,
-				_filter_preview_callback, &s_info.faces);
-		if (CAMERA_ERROR_NONE != error_code) {
-			DLOG_PRINT_ERROR("camera_set_preview_cb", error_code);
-		}
-	}
 }
 
 static void _main_view_sticker_button_cb(void) {
 	int error_code;
 
 	//sp is not unloaded
-	if (s_info.fin != 1 || s_info.filter != 0) {
+	if (s_info.fin != 1) {
 		return;
 	}
 
@@ -1040,6 +1055,13 @@ static void _main_view_change_button_cb() {
 	s_info.cammode = s_info.cammode ^ 1;
 }
 
+static void _main_view_motion_button_cb() {
+	if (s_info.filter != 0)
+		s_info.motion = 0;
+	else
+		s_info.motion = s_info.motion ^ 1;
+}
+
 /**
  * @brief Register needed app/camera callbacks for program to work
  */
@@ -1053,6 +1075,8 @@ static void _main_view_register_cbs(void) {
 			(Edje_Signal_Cb) _main_view_sticker_button_cb, NULL);
 	elm_object_signal_callback_add(s_info.layout, "camera_change_clicked", "*",
 			(Edje_Signal_Cb) _main_view_change_button_cb, NULL);
+	elm_object_signal_callback_add(s_info.layout, "camera_motion_clicked", "*",
+			(Edje_Signal_Cb) _main_view_motion_button_cb, NULL);
 }
 
 /*

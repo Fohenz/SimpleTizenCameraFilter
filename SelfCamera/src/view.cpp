@@ -37,6 +37,7 @@ static struct view_info {
 	Evas_Object *layout;
 	Evas_Object *popup;
 	Evas_Object *preview_canvas;
+	int nose[2];
 
 	camera_h camera;
 	Eina_Bool camera_enabled;
@@ -50,7 +51,7 @@ static struct view_info {
 	int cammode;
 	int fin;
 	int motion;
-	int cooltime;
+	int timer;
 	Eina_Bool flag_capturing;
 	Eina_Bool flag_facerunning;
 }s_info =
@@ -70,9 +71,11 @@ static struct view_info {
 	.fin = 0,
 	.cammode = 1, // default front camera
 	.motion = 0,
-	.cooltime = 2,
+	.timer = 8,
 	.flag_capturing = false,
 	.flag_facerunning = false,
+	.nose[0] = 0,
+	.nose[1] = 0,
 };
 
 static Evas_Object *_app_navi_add(void);
@@ -836,10 +839,41 @@ void face_landmark(camera_preview_data_s *frame, int count) {
 				(frame->data.double_plane.y)[i];
 	}
 
+	s_info.timer--;
+	if (s_info.timer < 0)
+		s_info.timer = 8;
 	// Now we will go ask the shape_predictor to tell us the pose of
 	// each face we detected.
 	for (unsigned long i = 0; i < count; ++i) {
 		dlib::full_object_detection shape = sp(img, s_info.faces[i]);
+
+		if (s_info.motion && i == 0) {
+			if (s_info.timer == 8) {
+				if (s_info.nose[0] != 0 && s_info.nose[1] != 0) {
+					int Vx = shape.part(33)(0) - s_info.nose[0];
+
+					if (Vx < 0)
+						Vx *= -1;
+					int val = s_info.faces[i].width();
+					if (Vx > val / 12) {
+						s_info.sticker = (s_info.sticker + 2);
+						if(s_info.sticker > MAX_STICKER)
+						{
+							s_info.sticker = 0;
+							camera_stop_face_detection(s_info.camera);
+							s_info.flag_facerunning = false;
+						}
+					}
+				}
+				int H = shape.part(51)(1) - shape.part(57)(1);
+				if(H < 0)
+					H *= -1;
+				if(H > s_info.faces[i].height()/6)
+					s_info.flag_capturing = true;
+			}
+			s_info.nose[0] = shape.part(33)(0);
+			s_info.nose[1] = shape.part(33)(1);
+		}
 
 		switch (s_info.sticker) {
 		case 2:

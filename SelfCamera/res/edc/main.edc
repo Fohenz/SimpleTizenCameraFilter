@@ -259,7 +259,18 @@ collections
                name: "clicked_motion";
                signal: "mouse_clicked,1";
                source: "motion";
-               filter: "motion" "default";
+               filter: "motion" "visible";
+               script {
+                  set_state(PART:"motion", "pressed", 0.0);
+                  emit("camera_motion_clicked", "motion");
+               }
+            }
+            program
+            {
+               name: "clicked_motion2";
+               signal: "mouse_clicked,1";
+               source: "motion";
+               filter: "motion" "pressed";
                script {
                   set_state(PART:"motion", "visible", 0.0);
                   emit("camera_motion_clicked", "motion");
@@ -271,7 +282,7 @@ collections
                signal: "mouse,down,*";
                source: "motion";
                script {
-                  set_state(PART:"motion", "pressed", 0.0);
+                  //set_state(PART:"motion", "pressed", 0.0);
                }
             }
             program
@@ -279,6 +290,18 @@ collections
                name: "up_motion";
                signal: "mouse,up,*";
                source: "motion";
+               filter: "motion" "visible";
+               script {
+                  set_state(PART:"motion", "pressed", 0.0);
+                  emit("camera_motion_clicked", "motion");
+               }
+            }
+            program
+            {
+               name: "up_motion2";
+               signal: "mouse,up,*";
+               source: "motion";
+               filter: "motion" "pressed";
                script {
                   set_state(PART:"motion", "visible", 0.0);
                   emit("camera_motion_clicked", "motion");
